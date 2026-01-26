@@ -229,215 +229,6 @@ const projects = {
         ],
         sections: [
             // 1. ROLE CARD
-
-            // 2. CONTEXT
-            {
-                type: 'text-row',
-                title: "THE LANDSCAPE",
-                header: "The 'Blank Page' Problem",
-                body: "Travel Managers have tons of data but zero time. Our old Analytics product was a powerful blank canvas—users had to manually drag-and-drop columns to build charts. Most gave up. We needed to lower the barrier to entry."
-            },
-
-            // 3. USER VOICE (Quote)
-            {
-                type: 'quote',
-                text: "I know the answer is in there, but I don't know how to build a pivot table. I just want to ask 'Why is our spend up?'",
-                author: "C-Level Executive"
-            },
-
-            // 4. DEFINITION
-            {
-                type: 'grid-problem-solution',
-                problem: "The Disconnect: Users think in questions ('Is New York expensive?'), but tools demand structure ('Group by City, Sum by Amount'). There was a translation gap.",
-                solution: "The Solution: A Conversational Interface. We use LLMs to translate natural language intent into structured SQL queries, auto-generating the perfect chart."
-            },
-
-            // 5. STRATEGY
-            {
-                type: 'text-row',
-                title: "STRATEGY",
-                header: "Confidence as a UX Metric",
-                body: "Our biggest risk wasn't technical; it was trust. If the AI hallucinated once, users would leave. We decided to prioritize 'Confidence' over 'Coverage'. If the definition was ambiguous, the AI would ask clarifying questions rather than guessing."
-            },
-
-            // 6. PROCESS: PROMPT ENGINEERING
-            {
-                type: 'process-timeline', // Reusing the timeline component for AI Logic steps
-                title: "DESIGNING INTELLIGENCE",
-                steps: [
-                    { title: "Intent Mapping", description: "I mapped 500+ common user questions to visualize what charts they actually needed. Found 9 core 'Intent Types' (Comparison, Trend, Distribution)." },
-                    { title: "The 'Confidence' UI", description: "Designed specific UI patterns for when the AI is 100% sure vs when it's guessing. Trust is fragile; we added 'Reasoning Citations' to every answer." },
-                    { title: "Adaptive Visualization", description: "Created a rendering engine that picks the right viz (Bar vs Line) based on data shape. (e.g., Dates = Line Chart)." },
-                    { title: "Feedback Loop", description: "Every answer has a 'Thumb Up/Down' to train the model on specific travel terminology." }
-                ]
-            },
-
-            // 7. EXPLORATION
-            { type: 'image-grid', title: "PROTOTYPES", items: [{ caption: "Natural Language Input" }, { caption: "Adaptive Charts Logic" }, { caption: "Error Handling (Hallucinations)" }] },
-
-            // 8. REFLECTION
-            {
-                type: 'reflection-grid',
-                rights: [
-                    "Guardrails: Restricting the AI to *only* answer from the database prevented 99% of hallucinations.",
-                    "Empty States: We added 'Suggested Questions' to the empty state, which increased first-time engagement by 300%."
-                ],
-                wrongs: [
-                    "Speed Perception: The LLM took 10s to load. We added a 'Thinking...' skeleton loader that showed *what* it was verifying to make the wait feel valuable."
-                ]
-            },
-
-            // 9. OUTCOME
-            {
-                type: 'stat-row',
-                stats: [
-                    { value: "8s", label: "Time to Insight" },
-                    { value: "92%", label: "Query Success Rate" },
-                    { value: "3k+", label: "Reports Generated" }
-                ]
-            }
-        ]
-    },
-    'nativebase-gluestack': {
-        hero: {
-            title: "NATIVEBASE & GLUESTACK",
-            subtitle: "The Universal UI Ecosystem",
-            gradient: "linear-gradient(135deg, #6B73FF, #000DFF)",
-            links: [
-                { label: "Gluestack.io", url: "https://gluestack.io" },
-                { label: "NativeBase.io", url: "https://nativebase.io" },
-                { label: "Market", url: "https://market.gluestack.io" }
-            ]
-        },
-        meta: [
-            { label: "Role", value: "Core Contributor" },
-            { label: "Ecosystem", value: "Library + Market + Templates" },
-            { label: "Duration", value: "2 Years" },
-            { label: "Reach", value: "91k+ Weekly Installs" }
-        ],
-        sections: [
-            // 1. ROLE CARD
-
-
-            // 2. CONTEXT
-            {
-                type: 'text-row',
-                title: "CONTEXT",
-                header: "The Victim of Success",
-                body: "NativeBase started with a simple mission: Write once, run anywhere. It quickly became the go-to component library for React Native. But success brought scrutiny. As apps grew, our 'Runtime Styling' engine started causing massive performance bottlenecks on low-end Android devices. We were slowing down the very apps we promised to speed up."
-            },
-
-            // 3. COMMUNITY VOICE
-            {
-                type: 'quote',
-                text: "I love the DX of NativeBase, but I can't deliver this to my client. The initial load time is 2 seconds just for styles. It's a dealbreaker.",
-                author: "Senior React Native Developer"
-            },
-
-            // 4. AUDIT & METRICS
-            {
-                type: 'text-row',
-                title: "THE AUDIT",
-                header: "Runtime Overhead",
-                body: "We profiled 50 production apps. The finding: The 'Style Resolver' took 150ms per screen. On a list with 100 items, that's 15 seconds of blocked JS thread. We hit a wall. Optimization wasn't enough; we needed a new architecture."
-            },
-
-            // 5. DEFINITION (The Pivot)
-            {
-                type: 'grid-problem-solution',
-                problem: "Performance vs. DX. Developers loved our prop-based styling (<Box p={4} />), but the bridge-crossing cost in React Native was too high. We had to choose: Keep the DX and lose performance, or write ugly code for speed.",
-                solution: "The 'Zero-Runtime' Pivot. We decided to build a compiler (babel-plugin) that extracts styles at BUILD time. Developers keep writing <Box p={4} />, but the user receives raw, flattened CSS. Best of both worlds."
-            },
-
-            // 6. VISUAL EVOLUTION
-            { type: 'visual-evolution' },
-
-            // 7. RESPONSIVE COMPONENT DEMO
-            {
-                type: 'iframe-embed',
-                src: "https://ui-example-nativewind.vercel.app/?iframeMode=dark",
-                title: "NativeBase Example",
-                caption: "Live Embedded Demo: A fully responsive dashboard built with Gluestack UI components.",
-                hideColumnTitle: true
-            },
-
-            // 7. STRATEGY: ACCESSIBILITY
-            {
-                type: 'text-row',
-                title: "METHODOLOGY",
-                header: "Universal Accessibility",
-                body: "This wasn't just a rewrite; it was an accessibility audit. We implemented WCAG 3.0 standards across 30+ components for both Web (ARIA) and Native (AccessibilityRoles). We built a 'Headless' layer (Gluestack UI) that handles ONLY logic, so users can bring their own styles."
-            },
-
-            // 8. ECOSYSTEM STRATEGY
-            {
-                type: 'full-text',
-                title: "MONETIZATION",
-                header: "Selling Speed, Not Just Components",
-                body: "Open Source needs funding. To prove the new architecture, I led the design of 'NativeBase Startup+'—a massive kit of 100+ production-ready screens. We didn't just sell components; we sold speed. This evolved into the 'Gluestack Market', a platform for premium React Native templates built on our new stack."
-            },
-
-            // 9. RESOURCES
-            {
-                type: 'link-list',
-                title: "RESOURCES",
-                links: [
-                    { label: "View NativeBase Startup+", url: "https://startup.nativebase.io", desc: "100+ Screens Kit" },
-                    { label: "Visit Gluestack Market", url: "https://market.gluestack.io", desc: "Premium Templates" },
-                    { label: "Corporate Hiring (TopGeek)", url: "https://corporate.topgeek.io", desc: "Recruitment Logic" }
-                ]
-            },
-
-            // 10. FIGMA EMBED
-            {
-                type: 'static-embed',
-                src: "https://embed.figma.com/file/1358053104938234615/hf_embed?community_viewer=true&embed_host=fastma&fuid=881210876543424729&kind=file&page-selector=0&viewer=1",
-                title: "Gluestack UI Figma Preview",
-                caption: "Preview of gluestack ui figma community file",
-                hideColumnTitle: true
-            },
-
-            // 11. REFLECTION
-            {
-                type: 'reflection-grid',
-                rights: [
-                    "Headless Architecture: Separating logic (Gluestack) from style (Style Library) allowed us to target two different user types.",
-                    "Monorepo: Moving to a monorepo structure improved contribution velocity by 40%."
-                ],
-                wrongs: [
-                    "Naming Fatigue: Changing names from NativeBase -> Gluestack caused confusion. We should have managed the brand transition better."
-                ]
-            },
-
-            // 12. OUTCOME
-            {
-                type: 'metrics-grid',
-                title: "OUTCOME",
-                items: [
-                    { value: "300+", label: "Startup+ Licenses" },
-                    { value: "2x", label: "Faster Builds" },
-                    { value: "100%", label: "WCAG 3.0 Score" }
-                ]
-            }
-        ]
-    },
-    'ai-assisted-reports': {
-        hero: {
-            title: "AI REPORTING",
-            subtitle: "From Blank Canvas to Instant Insights",
-            gradient: "linear-gradient(45deg, #00F260, #0575E6)",
-            links: [
-                { label: "Product Feature", url: "https://spotnana.com/analytics" }
-            ]
-        },
-        meta: [
-            { label: "Role", value: "Lead Designer" },
-            { label: "Team", value: "AI Lab (3 Eng, 1 PM)" },
-            { label: "Timeline", value: "8 Weeks (MVP)" },
-            { label: "Tech", value: "OpenAI + Internal Data" }
-        ],
-        sections: [
-            // 1. ROLE CARD
             {
                 type: 'role-card',
                 items: [
@@ -515,7 +306,141 @@ const projects = {
             }
         ]
     },
+    'nativebase-gluestack': {
+        hero: {
+            title: "NATIVEBASE & GLUESTACK",
+            subtitle: "Universal Component Libraries for Web & Mobile",
+            gradient: "linear-gradient(135deg, #6B73FF, #000DFF)",
+            links: [
+                { label: "Gluestack.io", url: "https://gluestack.io" },
+                { label: "NativeBase.io", url: "https://nativebase.io" },
+                { label: "Market", url: "https://market.gluestack.io" }
+            ]
+        },
+        meta: [
+            { label: "Role", value: "Product Designer" },
+            { label: "Ecosystem", value: "Component library, Design System, Light and Dark, Responsive UI Kit, Market" },
+            { label: "Timeline", value: "2021 - 2023" },
+            { label: "Impact", value: "Scalable UI for 87k+ Apps" }
+        ],
+        sections: [
+            // 1. INTRO: THE CONTEXT
+            {
+                type: 'text-row',
+                title: "THE CONTEXT",
+                header: "The UX Ceiling",
+                body: "NativeBase was a pioneer in cross-platform design, but as our user base grew to 87k+, we hit a 'Design Debt' wall. The rigid connection between our styling engine and component logic made it nearly impossible for designers to innovate without breaking the code. We weren't just solving a performance bug; we were solving a creativity blocker.",
+                wrapperClass: "mb-2",
+                className: "mb-2"
+            },
 
+            // LINK TO NATIVEBASE FIGMA KIT
+            {
+                type: 'link-list',
+                links: [
+                    { label: "NativeBase Design Kit", url: "https://www.figma.com/community/file/1098591432716522150", desc: "Access the legacy library source on Figma Community" }
+                ]
+            },
+
+            // 2. RESPONSIVE COMPONENT DEMO (Repositioned here)
+            {
+                type: 'iframe-embed',
+                src: "https://ui-example-nativewind.vercel.app/?iframeMode=dark",
+                title: "Live Result: Universal Dashboard",
+                caption: "Universal Architecture: Shared code across Next.js & Expo. Zero platform-specific overrides.",
+                hideColumnTitle: true
+            },
+
+            // 3. THE PIVOT
+            {
+                type: 'grid-problem-solution',
+                problem: "The Constraint: In the old system, 'Style' and 'Structure' were fused. If a designer wanted to change the visual language (e.g., spacing tokens), it required a deep refactor of the underlying React Native components.",
+                solution: "The Pivot: We decoupled the system. We split 'gluestack-style' (The Visual Language) from 'gluestack-ui' (The Component Structure). This allows designers to update tokens globally without touching the component logic."
+            },
+
+            // 4. VISUAL EVOLUTION
+            { type: 'visual-evolution' },
+
+            // 5. ECOSYSTEM OVERVIEW (Architecture)
+            {
+                type: 'full-text',
+                title: "SYSTEM ARCHITECTURE",
+                header: "A Universal Design Language",
+                body: "I led the restructuring of the ecosystem into three clear layers: **The Skeleton** (Headless UI), **The Skin** (Style Engine), and **The Application** (UI Pro). This layered approach meant we could ship a 'Core' system that was unopinionated, while selling 'Premium' themes that were highly opinionated."
+            },
+
+            // 6. FIGMA EMBED (Repositioned here)
+            {
+                type: 'static-embed',
+                src: "https://embed.figma.com/file/1358053104938234615/hf_embed?community_viewer=true&embed_host=fastma&fuid=881210876543424729&kind=file&page-selector=0&viewer=1",
+                title: "The Source of Truth",
+                caption: "Preview of the published gluestack-ui Figma community file.",
+                hideColumnTitle: true
+            },
+
+            // 7. DEEP DIVE: DESIGN KIT (Semantics)
+            {
+                type: 'process-timeline',
+                title: "PROJECT 1: THE SEMANTICS",
+                steps: [
+                    { title: "Token Definition", description: "Moved from raw hex codes to semantic tokens (e.g., 'primary.500' -> 'background.success'). This seemingly small change reduced design-to-dev handoff errors by 40%." },
+                    { title: "Accessibility First", description: "We didn't just 'audit' for accessibility; we designed it in. Every component was rebuilt to meet WCAG 3.0 standards (APCA) by default." },
+                    { title: "The 'Unstyled' Base", description: "Created a 'Headless' Figma library that stripped away all visual flair, giving designers a pure structural starting point." },
+                    { title: "Documentation", description: "Wrote the 'Design Engineering' guide, teaching content creators how to map Figma auto-layout constraints directly to code props." }
+                ]
+            },
+
+
+
+            // 8. DEEP DIVE: STARTUP+ (Scalability)
+            {
+                type: 'text-row',
+                title: "PROJECT 2: SCALABILITY",
+                header: "Proof of Scale",
+                body: "A design system is only as good as what you can build with it. To prove our new architecture worked, I led the design of 'Startup+' (now gluestack-ui pro)—a massive library of 100+ responsive screens. We used this project to stress-test our token system against complex, real-world layouts."
+            },
+
+            // LINK TO STARTUP+ / MARKET
+            {
+                type: 'link-list',
+                links: [
+                    { label: "Gluestack Market", url: "https://market.gluestack.io/", desc: "Formerly NativeBase Startup+ - 100+ Premium Screens" },
+                    { label: "Original Figma Kit", url: "https://www.figma.com/community/file/1093131923865961440", desc: "The original Startup+ trial file on Figma" }
+                ]
+            },
+
+            // 9. MARKETPLACE VISION
+            {
+                type: 'grid-problem-solution',
+                problem: "The Gap: Most design systems stop at 'Buttons' and 'Inputs'. But product teams need 'Dashboards' and 'Settings Pages'.",
+                solution: "The Solution: gluestack market. We turned our internal stress-tests into a product. A curated marketplace of high-fidelity, production-ready screen templates that respect the user's custom theme."
+            },
+
+            // 10. REFLECTION & LEARNINGS
+            {
+                type: 'reflection-grid',
+                rights: [
+                    "Design Tokens: Adopting a strict semantic token layer allowed us to support 'Dark Mode' and 'High Contrast' modes with zero extra effort from developers.",
+                    "Figma-to-Code: Mirroring the code structure in Figma (using nested Auto Layout frames) made the implementation phase almost trivial."
+                ],
+                wrongs: [
+                    "Naming Hard: Naming tokens is the hardest problem in Computer Science. We iterated on the 'Space' scale 5 times before finding a balance between flexibility and consistency.",
+                    "The 'Universal' Trap: Trying to design one button that works on Web, iOS, and Android is a compromise. We learned to embrace platform specifics where it mattered (e.g., Native navigation)."
+                ]
+            },
+
+            // 11. OUTCOME
+            {
+                type: 'metrics-grid',
+                title: "OUTCOME",
+                items: [
+                    { value: "87K+", label: "Weekly Downloads" },
+                    { value: "40%", label: "Faster Handoff" },
+                    { value: "100%", label: "WCAG 3.0 Score" }
+                ]
+            }
+        ]
+    }
 };
 
 // --- VISUAL COMPONENTS ---
@@ -538,37 +463,28 @@ const RBACVisual = () => (
 );
 
 const EvolutionVisual = () => (
-    <div className="w-full relative bg-charcoal border border-white/10 rounded-xl p-12 overflow-hidden">
-        <div className="grid md:grid-cols-3 gap-8 relative z-10">
-            <div className="p-6 border-l border-white/20">
-                <div className="text-xs font-mono text-red-400 mb-2">GENERATION 1</div>
-                <div className="font-display text-2xl text-mist">NativeBase</div>
-                <div className="text-xs text-mist/50 mt-2">Runtime Heavy</div>
+    <div className="w-full relative bg-charcoal border border-white/10 rounded-xl p-8 md:p-12 overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-8 relative z-10 w-full">
+            <div className="p-6 border-l border-white/20 flex-1 min-w-0">
+                <div className="text-xs font-mono text-red-400 mb-2 truncate">GENERATION 1</div>
+                <div className="font-display text-2xl text-mist truncate">NativeBase</div>
+                <div className="text-xs text-mist/50 mt-2 truncate">Runtime Heavy</div>
             </div>
-            <div className="p-6 border-l border-neon">
-                <div className="text-xs font-mono text-neon mb-2">GENERATION 2</div>
-                <div className="font-display text-2xl text-ice">Gluestack</div>
-                <div className="text-xs text-mist mt-2">Headless + Zero Runtime</div>
+            <div className="p-6 border-l border-neon flex-1 min-w-0">
+                <div className="text-xs font-mono text-neon mb-2 truncate">GENERATION 2</div>
+                <div className="font-display text-2xl text-ice truncate">Gluestack</div>
+                <div className="text-xs text-mist mt-2 truncate">Heading + Zero Runtime</div>
             </div>
-            <div className="p-6 border-l border-blue-400">
-                <div className="text-xs font-mono text-blue-400 mb-2">ECOSYSTEM</div>
-                <div className="font-display text-2xl text-ice">Market</div>
-                <div className="text-xs text-mist mt-2">Premium Templates</div>
+            <div className="p-6 border-l border-blue-400 flex-1 min-w-0">
+                <div className="text-xs font-mono text-blue-400 mb-2 truncate">ECOSYSTEM</div>
+                <div className="font-display text-2xl text-ice truncate">Market</div>
+                <div className="text-xs text-mist mt-2 truncate">Premium Templates</div>
             </div>
         </div>
     </div>
 );
 
 const ResizableEmbed = ({ src, title, caption }) => {
-    // Start at 100% width (approx 1200px or parent max). 
-    // We track pixels for smoother math, but 100% is nicer for responsiveness.
-    // Let's use a pixel value based on a reasonable desktop max, but clamp it.
-    // Actually, useMotionValue can hold percentages if we update it carefully, but pixels are easier for delta.
-    // Let's start with a rough estimate or 100%. 
-    // BETTER APPROACH: Use a ref for the container to get initial width, but that requires effect.
-    // SIMPLE APPROACH: Use a negative offset from "100%" using `calc(100% - Xpx)`.
-
-    // Let's use an offset value 'x' that starts at 0 and goes negative (shrinking).
     const containerRef = useRef(null);
     const resizeOffset = useMotionValue(0);
     const width = useMotionTemplate`calc(100% + ${resizeOffset}px)`;
@@ -576,13 +492,11 @@ const ResizableEmbed = ({ src, title, caption }) => {
 
     return (
         <div className="mb-32 flex flex-col items-center">
-            {/* Resizable Container */}
             <motion.div
                 ref={containerRef}
                 style={{ width }}
                 className="relative bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl origin-top mx-auto"
             >
-                {/* Header / Controls */}
                 <div className="h-8 bg-white/5 border-b border-white/5 flex items-center justify-between px-4">
                     <div className="flex gap-1.5 opacity-50">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
@@ -594,8 +508,6 @@ const ResizableEmbed = ({ src, title, caption }) => {
                     </div>
                     <div className="w-8" />
                 </div>
-
-                {/* Iframe Wrapper */}
                 <div className="relative w-full h-[708px] overflow-hidden bg-charcoal">
                     <iframe
                         src={src}
@@ -610,60 +522,35 @@ const ResizableEmbed = ({ src, title, caption }) => {
                             border: 'none',
                         }}
                     />
-
-                    {/* Interaction Overlay (Active during drag to prevent iframe capture) */}
                     {isResizing && <div className="absolute inset-0 z-50 bg-transparent cursor-ew-resize" />}
                 </div>
-
-                {/* Drag Handle - The "Resize Button" */}
-                {/* We use onPan to update the offset. Interaction is directly on this handle. */}
                 <motion.div
                     className="absolute top-0 right-0 w-6 h-full cursor-ew-resize z-50 flex items-center justify-center group touch-none"
                     onPan={(event, info) => {
                         if (!containerRef.current) return;
-
-                        // Calculate sensitivity to keep handle under cursor (2x for centered container)
                         const sensitivity = 2;
                         const delta = info.delta.x * sensitivity;
                         const currentOffset = resizeOffset.get();
                         const newOffset = currentOffset + delta;
-
-                        // Calculate the "Base Width" (pixels corresponding to 100%)
-                        // Current Visual Width = Base Width + Current Offset
-                        // Base Width = Current Visual Width - Current Offset
                         const currentVisualWidth = containerRef.current.offsetWidth;
                         const baseWidth = currentVisualWidth - currentOffset;
-
-                        // We want: Base Width + New Offset >= 400
-                        // New Offset >= 400 - Base Width
                         const minOffset = 400 - baseWidth;
-
-                        // Clamp: 
-                        // Min: Dynamic 400px limit
-                        // Max: 100px (Extension limit set previously)
                         const clampedOffset = Math.max(minOffset, Math.min(100, newOffset));
-
                         resizeOffset.set(clampedOffset);
                     }}
                     onPanStart={() => setIsResizing(true)}
                     onPanEnd={() => setIsResizing(false)}
                     whileHover={{ scale: 1.1 }}
                 >
-                    {/* Visible Handle Bar */}
                     <div className="w-1.5 h-12 bg-white/20 rounded-full group-hover:bg-neon transition-colors shadow-lg backdrop-blur-sm" />
                 </motion.div>
-
-                {/* Width Label Overlay */}
                 <motion.div
                     className="absolute top-2 right-10 px-2 py-1 bg-black/50 backdrop-blur text-[10px] font-mono text-neon rounded border border-white/10 opacity-0 transition-opacity"
                     animate={{ opacity: isResizing ? 1 : 0 }}
                 >
                     Resize Width
                 </motion.div>
-
             </motion.div>
-
-            {/* Caption */}
             <div className="mt-6 text-center max-w-xl mx-auto">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-mist mb-2">
                     <span className="w-2 h-2 rounded-full bg-neon animate-pulse" />
@@ -678,7 +565,6 @@ const ResizableEmbed = ({ src, title, caption }) => {
 const StaticEmbed = ({ src, title, caption }) => {
     return (
         <div className="mb-32 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
-            {/* Iframe Wrapper to handle the scaling transform cleanly */}
             <div className="relative w-full h-[708px] overflow-hidden">
                 <iframe
                     src={src}
@@ -689,14 +575,13 @@ const StaticEmbed = ({ src, title, caption }) => {
                         transformOrigin: '0px 0px',
                         transform: 'scale(0.8)',
                         width: '125%',
-                        height: '125%', // Compensate for scale(0.8) to fill height
+                        height: '125%',
                         border: 'none',
                         borderBottomLeftRadius: '16px',
                         borderBottomRightRadius: '16px'
                     }}
                 />
             </div>
-            {/* Optional Caption */}
             <div className="bg-[#111] p-4 text-center border-t border-white/10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-mist">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -711,31 +596,33 @@ const StaticEmbed = ({ src, title, caption }) => {
 
 const SectionRenderer = ({ section }) => {
     switch (section.type) {
-        // ... (other cases) ...
-
-        // --- NEW: Iframe Embed ---
         case 'iframe-embed':
             return <ResizableEmbed src={section.src} title={section.title} caption={section.caption} />;
 
         case 'text-row':
             return (
-                <div className="mb-32">
+                <div className={section.className || "mb-12"}>
                     <h2 className="font-display text-4xl md:text-5xl text-ice mb-6 leading-tight">{section.header}</h2>
                     <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{section.body}</p>
                 </div>
             );
+
         case 'grid-problem-solution':
             return (
-                <div className="grid md:grid-cols-2 gap-8 mb-32">
-                    <div className="p-8 border-t border-white/10 relative">
-                        <div className="absolute top-0 left-0 w-8 h-[1px] bg-red-500" />
-                        <div className="text-xs font-mono mb-4 text-red-400">PROBLEM</div>
-                        <p className="font-sans text-lg text-mist">{section.problem}</p>
+                <div className="flex flex-col gap-0 mb-32 rounded-2xl overflow-hidden border border-white/10">
+                    <div className="p-10 bg-[#111] relative">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-2 h-2 rounded-full bg-red-500" />
+                            <div className="text-xs font-mono text-red-400 tracking-widest">THE PROBLEM</div>
+                        </div>
+                        <p className="font-sans text-xl text-mist leading-relaxed max-w-4xl">{section.problem}</p>
                     </div>
-                    <div className="p-8 border-t border-white/10 relative bg-white/[0.02]">
-                        <div className="absolute top-0 left-0 w-8 h-[1px] bg-neon" />
-                        <div className="text-xs font-mono mb-4 text-neon">SOLUTION</div>
-                        <p className="font-sans text-lg text-ice">{section.solution}</p>
+                    <div className="p-10 bg-white/[0.03] relative border-t border-white/10">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-2 h-2 rounded-full bg-neon animate-pulse" />
+                            <div className="text-xs font-mono text-neon tracking-widest">THE SOLUTION</div>
+                        </div>
+                        <p className="font-sans text-xl text-ice leading-relaxed max-w-4xl">{section.solution}</p>
                     </div>
                 </div>
             );
@@ -752,14 +639,14 @@ const SectionRenderer = ({ section }) => {
             );
         case 'full-text':
             return (
-                <div className="mb-32 border-l border-neon pl-8 py-2">
+                <div className="mb-32 border-l-2 border-neon pl-8 py-2">
                     <h3 className="font-display text-2xl text-ice mb-4">{section.header}</h3>
                     <p className="font-sans text-lg text-mist leading-relaxed max-w-3xl">{section.body}</p>
                 </div>
             );
         case 'link-list':
             return (
-                <div className="mb-32">
+                <div className="mb-12">
                     <div className="grid md:grid-cols-1 gap-4">
                         {section.links.map((link, i) => (
                             <a key={i} href={link.url} target="_blank" className="relative group block p-8 border border-white/10 hover:border-neon transition-colors rounded-xl bg-charcoal overflow-hidden">
@@ -817,26 +704,34 @@ const SectionRenderer = ({ section }) => {
                 </div>
             );
 
-        // --- NEW: Reflection Grid ---
+        // --- NEW: Reflection Grid (Stacked Layout) ---
         case 'reflection-grid':
             return (
-                <div className="mb-32 grid md:grid-cols-2 gap-12">
-                    <div className="bg-[#111] p-10 rounded-2xl border-l-4 border-green-500">
-                        <h4 className="text-2xl font-display text-white mb-6">What went right</h4>
-                        <ul className="space-y-4">
+                <div className="mb-32 flex flex-col gap-6">
+                    <div className="bg-[#111] p-10 rounded-2xl border-l-[6px] border-green-500 w-full relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-10 opacity-10 blur-3xl group-hover:opacity-20 transition-opacity">
+                            <div className="w-32 h-32 bg-green-500 rounded-full" />
+                        </div>
+                        <h4 className="text-2xl font-display text-white mb-6 relative z-10">What went right</h4>
+                        <ul className="space-y-4 relative z-10">
                             {section.rights.map((item, i) => (
-                                <li key={i} className="flex gap-3 text-gray-400">
-                                    <span className="text-green-500">✓</span> {item}
+                                <li key={i} className="flex gap-4 text-mist leading-relaxed items-start text-lg">
+                                    <span className="text-green-500 mt-1.5 text-xl">✓</span>
+                                    <span>{item}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="bg-[#111] p-10 rounded-2xl border-l-4 border-red-500">
-                        <h4 className="text-2xl font-display text-white mb-6">What went wrong</h4>
-                        <ul className="space-y-4">
+                    <div className="bg-[#111] p-10 rounded-2xl border-l-[6px] border-red-500 w-full relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-10 opacity-10 blur-3xl group-hover:opacity-20 transition-opacity">
+                            <div className="w-32 h-32 bg-red-500 rounded-full" />
+                        </div>
+                        <h4 className="text-2xl font-display text-white mb-6 relative z-10">What went wrong</h4>
+                        <ul className="space-y-4 relative z-10">
                             {section.wrongs.map((item, i) => (
-                                <li key={i} className="flex gap-3 text-gray-400">
-                                    <span className="text-red-500">×</span> {item}
+                                <li key={i} className="flex gap-4 text-mist leading-relaxed items-start text-lg">
+                                    <span className="text-red-500 mt-1.5 text-xl">×</span>
+                                    <span>{item}</span>
                                 </li>
                             ))}
                         </ul>
@@ -995,7 +890,7 @@ export default function CaseStudy() {
                             {/* Content Column */}
                             <div className="lg:col-span-9 p-8 lg:p-16">
                                 {project.sections.map((section, i) => (
-                                    <div key={i} className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+                                    <div key={i} className={`grid grid-cols-1 md:grid-cols-12 gap-8 ${section.wrapperClass || 'mb-12'}`}>
                                         {/* Section Label (Left) */}
                                         {!section.hideColumnTitle && (
                                             <div className="md:col-span-3">
