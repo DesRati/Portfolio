@@ -13,107 +13,103 @@ const projects = {
     'rbac-role-management': {
         hero: {
             title: "RBAC & ROLE MANAGEMENT",
-            subtitle: "Deconstructing Enterprise Security",
+            subtitle: "Transforming Rigid Permission Systems",
             gradient: "linear-gradient(45deg, #FF3366, #FF9933)",
             links: [
                 { label: "Spotnana Platform", url: "https://www.spotnana.com" }
             ]
         },
         meta: [
-            { label: "Role", value: "Lead Designer / Acting PM" },
-            { label: "Team", value: "Product (1) + Eng (4)" },
-            { label: "Duration", value: "6 Months (Ongoing)" },
-            { label: "Key Stat", value: "100% Policy Coverage" }
+            { label: "Role", value: "Product Designer" },
+            { label: "Timeline", value: "2025" },
+            { label: "Team", value: "Cross-functional (Eng, Product, Design)" },
+            { label: "Result", value: "Enterprise Scalability" }
         ],
         sections: [
-            // 1. ROLE & METADATA
-
-
-            // 2. CONTEXT
+            // 1. EXECUTIVE SUMMARY
             {
                 type: 'text-row',
-                title: "THE SECURITY PARADOX",
-                header: "Granularity vs Simplicity",
-                body: "Spotnana powers travel for massive global enterprises (Fortune 100). But our legacy permission model was rigid: you were either an Admin or a Traveler. We lacked the granularity to handle complex real-world hierarchies (e.g., 'A specific HR manager should only approve Visa requests for the German branch'). We needed a system that was infinitely flexible but simple enough for a non-technical HR admin to manage."
+                title: "EXECUTIVE SUMMARY",
+                header: "From Rigid to Flexible",
+                body: "I led the end-to-end design of a Role-Based Access Control system that replaced Spotnana's rigid, one-size-fits-all permission model. The result: enterprises can now configure precise access structures that match their organizational needs—something previously impossible without manual workarounds."
             },
 
-            // 3. DISCOVERY (User Research)
-            {
-                type: 'quote',
-                text: "I'm terrified to touch the permissions page. I don't know who has access to what, so I just email support to make changes for me.",
-                author: "Travel Admin @ Fortune 500 Client"
-            },
-            {
-                type: 'text-row',
-                title: "DISCOVERY",
-                header: "The 'Ghost' Permissions",
-                body: "I conducted 12 interviews with Travel Managers and audited our existing database. The results were shocking: 60% of our existing 'permission flags' were never used or broken. Admins were flying blind, relying on 'Copy User' features because they didn't understand the underlying logic. We weren't just solving a UI problem; we had a trust problem."
-            },
-
-            // 4. PROBLEM DEFINITION (HMW)
+            // 2. THE PROBLEM
             {
                 type: 'grid-problem-solution',
-                problem: "The Legacy System: flat list of 150+ checkboxes. No audit logs. No scoping (giving access to ONLY a specific department). It was 'All or Nothing'.",
-                solution: "The Opportunity: Move from a 'List-based' model to a 'Logic-based' model. We needed to introduce the concept of SCOPE—restricting permissions to specific entities."
+                problem: "Legacy Constraints: Spotnana's original model had 5 fixed roles (e.g. 'Traveler', 'Admin'). This created friction. A Finance Manager needed to see spend reports but shouldn't be able to book trips. The system forced an all-or-nothing choice.",
+                solution: "The Opportunity: We needed to decouple capabilities. Instead of fixed personas, we needed a mix-and-match framework where 'Access' could be composed finely based on the user's actual job function."
             },
 
-            // 5. EXPLORATION & SKETCHES
+            // 3. RESEARCH
             {
-                type: 'image-grid',
-                title: "EXPLORATION",
-                items: [
-                    { caption: "Sketching the Object Model" },
-                    { caption: "Early Wireframes: Logic Builder" }
-                ]
+                type: 'quote',
+                text: "Every enterprise has a different org structure. We keep having to tell them 'the system doesn't support that' and it's embarrassing.",
+                author: "Implementation Manager"
             },
             {
                 type: 'text-row',
-                title: "THE BREAKTHROUGH",
-                header: "Treating Permissions as an Equation",
-                body: "I realized we couldn't just 'design a better list'. We needed a sentence builder. I worked with the backend team to define a new mental model: WHO (User) + WHAT (Role) + WHERE (Scope) = ACCESS. This simple equation became the foundation of the entire UI."
+                title: "RESEARCH & DISCOVERY",
+                header: "The Compliance Gap",
+                body: "Interviews with Implementation Managers revealing a critical pattern: Compliance teams needed 'Read-Only' visibility into sensitive settings without 'Edit' rights. Our legacy system didn't support this distinction, creating major security risks for public companies."
             },
 
-            // 6. PROCESS (Execution)
+            // 4. DESIGN FRAMEWORK
+            {
+                type: 'text-row',
+                title: "DESIGN FRAMEWORK",
+                header: "The Mental Model",
+                body: "To simplify the complexity, I developed a simple equation that guided both the backend schema and the frontend UI: A User Group is simply a combination of Users, specific Roles, and a defined Scope."
+            },
+            { type: 'visual-rbac-equation' },
+
+            // 5. BUILDING BLOCKS
+            {
+                type: 'text-row',
+                title: "BUILDING BLOCKS",
+                header: "1. Defined Roles",
+                body: "We moved from 5 loose titles to a rigorous set of 11 distinct roles with clear permission boundaries. We also introduced 'Read Only' variants for every admin type for compliance purposes."
+            },
+            { type: 'visual-rbac-roles' },
+
+            {
+                type: 'text-row',
+                header: "2. Hierarchical Scope",
+                body: "The most complex part of the system. Permissions needed to flow down. If I'm an Admin for 'North America', I should automatically inherit access to 'USA' and 'Canada' legal entities, but not 'France'."
+            },
+            { type: 'visual-rbac-scope' },
+
+            // 6. PROCESS
             {
                 type: 'process-timeline',
-                title: "EXECUTION PHASES",
+                title: "PROCESS & COLLABORATION",
                 steps: [
-                    { title: "1. Audit & Cleanup", description: "Consolidated 150+ legacy flags into 40 distinct 'Actions'. Removed ghost permissions." },
-                    { title: "2. The Builder UI", description: "Designed a natural-language interface: 'Allow [User] to [Edit Policy] for [German Employees]'." },
-                    { title: "3. Stress Testing", description: "Validated the new model against our most complex client's Org Chart (50k+ nodes)." },
-                    { title: "4. Migration Plan", description: "Designed a safe 'Zero-Downtime' migration flow for existing customers." }
+                    { title: "Engineering Syncs", description: "I joined backend architecture reviews early. Understanding the 'Inheritance Model' in the database helped me design a UI that matched the reality of the code." },
+                    { title: "Senior Stakeholders", description: "Engineers had varied opinions on flexibility vs performance. My role was to ground these debates in real customer scenarios (e.g., 'The Regional Manager Problem')." },
+                    { title: "Iterative Logic", description: "We initially aimed for infinite nesting but found it confusing. I pivoted the design to a fixed 4-level hierarchy (Platform -> TMC -> Organization -> Entity) which simplified the UI significantly." }
                 ]
             },
 
-            // 7. SOLUTION DEEP DIVE (Visuals)
-            { type: 'visual-rbac' },
-            {
-                type: 'text-row',
-                header: "The Builder Interface",
-                body: "The final design moved away from terrifying checkboxes to a clean, sentence-based builder. We added 'Impact Preview'—showing Admins exactly WHO would be affected by a change before they saved it. This feature alone reduced 'Fear of click' by 80% in user testing."
-            },
-
-            // 8. OUTCOME & IMPACT
+            // 7. OUTCOMES
             {
                 type: 'stat-row',
                 stats: [
-                    { value: "100%", label: "Audit Coverage" },
-                    { value: "40%", label: "Fewer Tickets" },
-                    { value: "0", label: "Security Leaks" },
-                    { value: "50k+", label: "Users Migrated" }
+                    { value: "100%", label: "Org Configurable" },
+                    { value: "40%", label: "Less Support Tickets" },
+                    { value: "0", label: "Compliance Risks" },
+                    { value: "Scalable", label: "Framework" }
                 ]
             },
 
-            // 9. REFLECTION
+            // 8. LEARNINGS
             {
                 type: 'reflection-grid',
                 rights: [
-                    "Early Engineering Sync: Defining the schema before pixel design saved weeks of rework.",
-                    "Semantic Naming: Renaming technical flags to human-readable terms reduced support tickets."
+                    "Simple Mental Models: The 'User Group = Role + Scope' equation was a breakthrough. It gave non-technical stakeholders a language to discuss permissions.",
+                    "Being Technical: Attending backend syncs allowed me to spot edge cases (like 'what happens when a user moves departments?') before I started designing."
                 ],
                 wrongs: [
-                    "Over-abstraction: Initially designed for infinite nesting, which confused users. Scaled back to 3 levels.",
-                    "Mobile First: Wasted time on mobile flows. 99% of Admin work happens on desktop."
+                    "Owning Ambiguity: At times I waited for PM definition. I learned that in complex system design, the Designer often has to define the logic to unblock the team."
                 ]
             }
         ]
@@ -445,22 +441,195 @@ const projects = {
 
 // --- VISUAL COMPONENTS ---
 
-const RBACVisual = () => (
-    <div className="w-full relative group overflow-hidden bg-white/5 border border-white/10 rounded-xl p-12">
-        <div className="absolute inset-0 bg-gradient-to-br from-neon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-        <h4 className="font-mono text-neon text-xs uppercase tracking-widest mb-12 text-center relative z-10">Usage Logic Equation</h4>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4 text-center relative z-10">
-            {['USERS', '+', 'ROLES', '+', 'SCOPE', '=', 'ACCESS'].map((item, i) => (
-                <div key={i} className={`font-display text-2xl md:text-3xl ${['+', '='].includes(item) ? 'text-neon' : 'text-ice'}`}>
-                    {item}
+// --- ICONS ---
+const UserIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>;
+const ShieldIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+const TargetIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>;
+const KeyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="7.5" cy="15.5" r="5.5" /><path d="m21 2-9.6 9.6" /><path d="m15.5 7.5 3 3L22 7l-3-3" /></svg>;
+const GlobeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>;
+const BuildingIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M8 10h.01" /><path d="M16 10h.01" /><path d="M8 14h.01" /><path d="M16 14h.01" /><path d="M8 18h.01" /><path d="M16 18h.01" /></svg>;
+const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>;
+
+const RBACEquationVisual = () => (
+    <div className="w-full relative bg-[#1e1e1e] border border-[#333] rounded-3xl p-8 lg:p-12 overflow-hidden select-none">
+        {/* Infinite Canvas Dot Pattern */}
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#888 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+
+        <div className="relative z-10 flex flex-col flex-wrap lg:flex-nowrap items-center justify-center gap-8 min-h-[400px]">
+
+            <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
+                {/* Sticky Note: User */}
+                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+                    <div className="w-40 h-40 bg-[#FFD02F] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
+                        <div className="scale-125 mb-3 opacity-80"><UserIcon /></div>
+                        <div className="font-display text-xl font-bold">User</div>
+                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The Who"</div>
+                    </div>
+                    {/* Fake Cursor */}
+                    <div className="absolute -top-3 -left-3 z-30 pointer-events-none animate-pulse">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#F24E1E" stroke="white" strokeWidth="1" /></svg>
+                        <div className="bg-[#F24E1E] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Admin</div>
+                    </div>
                 </div>
-            ))}
-        </div>
-        <div className="text-center mt-8 text-mist text-sm max-w-md mx-auto relative z-10">
-            Defining <span className="text-ice">Who</span> can do <span className="text-ice">What</span>, <span className="text-ice">Where</span>.
+
+                {/* Connector */}
+                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">+</div>
+
+                {/* Sticky Note: Role */}
+                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[1deg] hover:rotate-0 transition-transform duration-300">
+                    <div className="w-40 h-40 bg-[#E0B6FF] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
+                        <div className="scale-125 mb-3 opacity-80"><ShieldIcon /></div>
+                        <div className="font-display text-xl font-bold">Role</div>
+                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The What"</div>
+                    </div>
+                    {/* Fake Cursor */}
+                    <div className="absolute -bottom-3 -right-3 z-30 pointer-events-none">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg transform rotate-180"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#0D99FF" stroke="white" strokeWidth="1" /></svg>
+                        <div className="bg-[#0D99FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-tl-lg rounded-bl-lg rounded-br-lg shadow-sm mr-2 -mt-1">Report Admin</div>
+                    </div>
+                </div>
+
+                {/* Connector */}
+                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">+</div>
+
+                {/* Sticky Note: Scope */}
+                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
+                    <div className="w-40 h-40 bg-[#69F0AE] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
+                        <div className="scale-125 mb-3 opacity-80"><TargetIcon /></div>
+                        <div className="font-display text-xl font-bold">Scope</div>
+                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The Where"</div>
+                    </div>
+                    {/* Fake Cursor */}
+                    <div className="absolute top-0 right-0 z-30 pointer-events-none animate-bounce duration-1000">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#9747FF" stroke="white" strokeWidth="1" /></svg>
+                        <div className="bg-[#9747FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Company</div>
+                    </div>
+                </div>
+
+                {/* Equals */}
+                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">=</div>
+
+                {/* Sticky Note: Result */}
+                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[2deg] hover:rotate-0 transition-transform duration-300">
+                    <div className="w-40 h-40 bg-[#FF9D9D] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
+                        <div className="scale-125 mb-3 opacity-80"><KeyIcon /></div>
+                        <div className="font-display text-xl font-bold leading-none mb-1">Access</div>
+                        <div className="font-serif italic text-sm opacity-70 text-center leading-tight">"The Result"</div>
+                    </div>
+                    {/* Fake Cursor */}
+                    <div className="absolute -bottom-4 left-4 z-30 pointer-events-none">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#00C19C" stroke="white" strokeWidth="1" /></svg>
+                        <div className="bg-[#00C19C] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Report Admins</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 );
+
+const RBACScopeVisual = () => (
+    <div className="w-full relative bg-[#050505] border border-white/5 rounded-3xl p-8 md:p-12 overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+
+            <div className="order-2 md:order-1 relative">
+                <div className="absolute left-[15px] top-6 bottom-6 w-px bg-gradient-to-b from-white/5 via-white/20 to-white/5" />
+
+                <div className="space-y-4">
+                    {[
+                        { label: 'Platform', icon: GlobeIcon, active: false },
+                        { label: 'TMC Agency', icon: BuildingIcon, active: false },
+                        { label: 'Organization', icon: BriefcaseIcon, active: true },
+                        { label: 'Legal Entity', icon: null, text: 'LE', active: false },
+                        { label: 'Traveler', icon: UserIcon, active: false },
+                    ].map((item, i) => (
+                        <div key={i} className={`relative pl-12 transition-all duration-300 ${item.active ? 'opacity-100' : 'opacity-40 hover:opacity-100'}`}>
+                            {/* Dot on line */}
+                            <div className={`absolute left-[11px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border border-[#050505] transition-colors ${item.active ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'bg-white/10'}`} />
+
+                            <div className={`p-4 rounded-lg border flex items-center justify-between group ${item.active ? 'bg-blue-500/5 border-blue-500/20' : 'bg-[#111] border-white/5'}`}>
+                                <div className="flex items-center gap-3">
+                                    <div className={`text-${item.active ? 'blue-400' : 'mist'}`}>
+                                        {item.icon ? <item.icon /> : <span className="font-mono text-xs">{item.text}</span>}
+                                    </div>
+                                    <span className="text-sm font-medium text-white">{item.label}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="order-1 md:order-2">
+                <div className="inline-block mb-6 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-mist uppercase tracking-widest">
+                    Hierarchy
+                </div>
+                <h3 className="font-display text-3xl text-white mb-6">Waterfall Inheritance</h3>
+                <p className="text-mist leading-relaxed text-sm md:text-base">
+                    Access flows downwards. Granting permissions at the <span className="text-white font-medium">Organization</span> level automatically cascades to every <span className="text-mist">Legal Entity</span> and <span className="text-mist">Traveler</span> node below it.
+                </p>
+            </div>
+        </div>
+    </div>
+);
+
+const RBACRolesVisual = () => {
+    const roles = [
+        { name: "Trip Manager", desc: "Manage & approve bookings", scope: "Write", color: "bg-orange-500/20 text-orange-200" },
+        { name: "Reporting Admin", desc: "View spend analytics", scope: "Read", color: "bg-blue-500/20 text-blue-200" },
+        { name: "Company Admin", desc: "Full configuration access", scope: "Full", color: "bg-red-500/20 text-red-200" },
+        { name: "Card Manager", desc: "Unmask corporate cards", scope: "Secure", color: "bg-yellow-500/20 text-yellow-200" },
+        { name: "Integrator", desc: "HR feed synchronization", scope: "System", color: "bg-purple-500/20 text-purple-200" },
+        { name: "Auditor", desc: "Read-only compliance check", scope: "Read", color: "bg-blue-500/20 text-blue-200" },
+    ];
+
+    return (
+        <div className="w-full relative bg-[#191919] rounded-xl overflow-hidden border border-[#333]">
+            {/* Window Controls (Notion style) */}
+            <div className="flex items-center gap-2 p-4 border-b border-[#333] bg-[#202020]">
+                <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+                <div className="w-3 h-3 rounded-full bg-[#28C840]" />
+                <div className="ml-4 text-xs font-sans text-stone-400">Roles Database</div>
+            </div>
+
+            <div className="p-0">
+                <div className="w-full text-left border-collapse">
+                    {/* Header */}
+                    <div className="grid grid-cols-12 px-4 py-3 border-b border-[#333] text-xs font-sans text-stone-500">
+                        <div className="col-span-4 pl-2">Aa Role Name</div>
+                        <div className="col-span-6 border-l border-[#333] pl-4">≡ Description</div>
+                        <div className="col-span-2 border-l border-[#333] pl-4">▼ Access</div>
+                    </div>
+
+                    {/* Rows */}
+                    {roles.map((role, i) => (
+                        <div key={i} className="grid grid-cols-12 px-4 py-3 border-b border-[#333] last:border-0 hover:bg-[#202020] transition-colors group">
+                            <div className="col-span-4 flex items-center gap-2 pl-2">
+                                <span className="text-stone-600 group-hover:text-stone-400 transition-colors">📄</span>
+                                <span className="font-sans text-sm text-stone-200 font-medium">{role.name}</span>
+                            </div>
+                            <div className="col-span-6 flex items-center pl-4 border-l border-[#333] border-dashed">
+                                <span className="font-sans text-sm text-stone-400">{role.desc}</span>
+                            </div>
+                            <div className="col-span-2 flex items-center pl-4 border-l border-[#333] border-dashed">
+                                <span className={`px-2 py-0.5 rounded text-[11px] font-sans font-medium ${role.color} whitespace-nowrap`}>
+                                    {role.scope}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* Add New Row Placeholder */}
+                    <div className="grid grid-cols-12 px-4 py-3 text-stone-600 hover:bg-[#202020] transition-colors cursor-pointer">
+                        <div className="col-span-12 pl-2 flex items-center gap-2 text-sm font-sans">
+                            <span>+ New</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const EvolutionVisual = () => (
     <div className="w-full relative bg-charcoal border border-white/10 rounded-xl p-8 md:p-12 overflow-hidden">
@@ -672,7 +841,9 @@ const SectionRenderer = ({ section }) => {
                     <div className="font-mono text-xs text-neon uppercase tracking-widest px-4 py-2 border border-neon rounded-full">{section.author}</div>
                 </div>
             );
-        case 'visual-rbac': return <div className="mb-32"><RBACVisual /></div>;
+        case 'visual-rbac-equation': return <div className="mb-32"><RBACEquationVisual /></div>;
+        case 'visual-rbac-scope': return <div className="mb-32"><RBACScopeVisual /></div>;
+        case 'visual-rbac-roles': return <div className="mb-32"><RBACRolesVisual /></div>;
         case 'visual-evolution': return <div className="mb-32"><EvolutionVisual /></div>;
 
         // --- NEW: Static Embed (Clean, no resize) ---
