@@ -1,6 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
@@ -351,6 +352,15 @@ const projects = {
             // 6. VISUAL EVOLUTION
             { type: 'visual-evolution' },
 
+            // 7. RESPONSIVE COMPONENT DEMO
+            {
+                type: 'iframe-embed',
+                src: "https://ui-example-nativewind.vercel.app/?iframeMode=dark",
+                title: "NativeBase Example",
+                caption: "Live Embedded Demo: A fully responsive dashboard built with Gluestack UI components.",
+                hideColumnTitle: true
+            },
+
             // 7. STRATEGY: ACCESSIBILITY
             {
                 type: 'text-row',
@@ -378,7 +388,16 @@ const projects = {
                 ]
             },
 
-            // 10. REFLECTION
+            // 10. FIGMA EMBED
+            {
+                type: 'static-embed',
+                src: "https://embed.figma.com/file/1358053104938234615/hf_embed?community_viewer=true&embed_host=fastma&fuid=881210876543424729&kind=file&page-selector=0&viewer=1",
+                title: "Gluestack UI Figma Preview",
+                caption: "Preview of gluestack ui figma community file",
+                hideColumnTitle: true
+            },
+
+            // 11. REFLECTION
             {
                 type: 'reflection-grid',
                 rights: [
@@ -390,7 +409,7 @@ const projects = {
                 ]
             },
 
-            // 11. OUTCOME
+            // 12. OUTCOME
             {
                 type: 'metrics-grid',
                 title: "OUTCOME",
@@ -540,10 +559,164 @@ const EvolutionVisual = () => (
     </div>
 );
 
+const ResizableEmbed = ({ src, title, caption }) => {
+    // Start at 100% width (approx 1200px or parent max). 
+    // We track pixels for smoother math, but 100% is nicer for responsiveness.
+    // Let's use a pixel value based on a reasonable desktop max, but clamp it.
+    // Actually, useMotionValue can hold percentages if we update it carefully, but pixels are easier for delta.
+    // Let's start with a rough estimate or 100%. 
+    // BETTER APPROACH: Use a ref for the container to get initial width, but that requires effect.
+    // SIMPLE APPROACH: Use a negative offset from "100%" using `calc(100% - Xpx)`.
+
+    // Let's use an offset value 'x' that starts at 0 and goes negative (shrinking).
+    const containerRef = useRef(null);
+    const resizeOffset = useMotionValue(0);
+    const width = useMotionTemplate`calc(100% + ${resizeOffset}px)`;
+    const [isResizing, setIsResizing] = useState(false);
+
+    return (
+        <div className="mb-32 flex flex-col items-center">
+            {/* Resizable Container */}
+            <motion.div
+                ref={containerRef}
+                style={{ width }}
+                className="relative bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl origin-top mx-auto"
+            >
+                {/* Header / Controls */}
+                <div className="h-8 bg-white/5 border-b border-white/5 flex items-center justify-between px-4">
+                    <div className="flex gap-1.5 opacity-50">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                    </div>
+                    <div className="text-[10px] font-mono text-white/30 tracking-widest uppercase">
+                        {title}
+                    </div>
+                    <div className="w-8" />
+                </div>
+
+                {/* Iframe Wrapper */}
+                <div className="relative w-full h-[708px] overflow-hidden bg-charcoal">
+                    <iframe
+                        src={src}
+                        title={title}
+                        loading="lazy"
+                        className="w-full h-full rounded-none"
+                        style={{
+                            transformOrigin: '0px 0px',
+                            transform: 'scale(0.8)',
+                            width: '125%',
+                            height: '125%',
+                            border: 'none',
+                        }}
+                    />
+
+                    {/* Interaction Overlay (Active during drag to prevent iframe capture) */}
+                    {isResizing && <div className="absolute inset-0 z-50 bg-transparent cursor-ew-resize" />}
+                </div>
+
+                {/* Drag Handle - The "Resize Button" */}
+                {/* We use onPan to update the offset. Interaction is directly on this handle. */}
+                <motion.div
+                    className="absolute top-0 right-0 w-6 h-full cursor-ew-resize z-50 flex items-center justify-center group touch-none"
+                    onPan={(event, info) => {
+                        if (!containerRef.current) return;
+
+                        // Calculate sensitivity to keep handle under cursor (2x for centered container)
+                        const sensitivity = 2;
+                        const delta = info.delta.x * sensitivity;
+                        const currentOffset = resizeOffset.get();
+                        const newOffset = currentOffset + delta;
+
+                        // Calculate the "Base Width" (pixels corresponding to 100%)
+                        // Current Visual Width = Base Width + Current Offset
+                        // Base Width = Current Visual Width - Current Offset
+                        const currentVisualWidth = containerRef.current.offsetWidth;
+                        const baseWidth = currentVisualWidth - currentOffset;
+
+                        // We want: Base Width + New Offset >= 400
+                        // New Offset >= 400 - Base Width
+                        const minOffset = 400 - baseWidth;
+
+                        // Clamp: 
+                        // Min: Dynamic 400px limit
+                        // Max: 100px (Extension limit set previously)
+                        const clampedOffset = Math.max(minOffset, Math.min(100, newOffset));
+
+                        resizeOffset.set(clampedOffset);
+                    }}
+                    onPanStart={() => setIsResizing(true)}
+                    onPanEnd={() => setIsResizing(false)}
+                    whileHover={{ scale: 1.1 }}
+                >
+                    {/* Visible Handle Bar */}
+                    <div className="w-1.5 h-12 bg-white/20 rounded-full group-hover:bg-neon transition-colors shadow-lg backdrop-blur-sm" />
+                </motion.div>
+
+                {/* Width Label Overlay */}
+                <motion.div
+                    className="absolute top-2 right-10 px-2 py-1 bg-black/50 backdrop-blur text-[10px] font-mono text-neon rounded border border-white/10 opacity-0 transition-opacity"
+                    animate={{ opacity: isResizing ? 1 : 0 }}
+                >
+                    Resize Width
+                </motion.div>
+
+            </motion.div>
+
+            {/* Caption */}
+            <div className="mt-6 text-center max-w-xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-mist mb-2">
+                    <span className="w-2 h-2 rounded-full bg-neon animate-pulse" />
+                    Interactive Demo
+                </div>
+                <p className="text-sm text-mist">{caption}</p>
+            </div>
+        </div>
+    );
+};
+
+const StaticEmbed = ({ src, title, caption }) => {
+    return (
+        <div className="mb-32 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
+            {/* Iframe Wrapper to handle the scaling transform cleanly */}
+            <div className="relative w-full h-[708px] overflow-hidden">
+                <iframe
+                    src={src}
+                    title={title}
+                    loading="lazy"
+                    className="w-full h-full rounded-none"
+                    style={{
+                        transformOrigin: '0px 0px',
+                        transform: 'scale(0.8)',
+                        width: '125%',
+                        height: '125%', // Compensate for scale(0.8) to fill height
+                        border: 'none',
+                        borderBottomLeftRadius: '16px',
+                        borderBottomRightRadius: '16px'
+                    }}
+                />
+            </div>
+            {/* Optional Caption */}
+            <div className="bg-[#111] p-4 text-center border-t border-white/10">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-mist">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    Live Preview
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- SECTIONS ---
 
 const SectionRenderer = ({ section }) => {
     switch (section.type) {
+        // ... (other cases) ...
+
+        // --- NEW: Iframe Embed ---
+        case 'iframe-embed':
+            return <ResizableEmbed src={section.src} title={section.title} caption={section.caption} />;
+
         case 'text-row':
             return (
                 <div className="mb-32">
@@ -614,6 +787,12 @@ const SectionRenderer = ({ section }) => {
             );
         case 'visual-rbac': return <div className="mb-32"><RBACVisual /></div>;
         case 'visual-evolution': return <div className="mb-32"><EvolutionVisual /></div>;
+
+        // --- NEW: Static Embed (Clean, no resize) ---
+        case 'static-embed':
+            return <StaticEmbed src={section.src} title={section.title} caption={section.caption} />;
+
+
 
         // --- NEW: Process Timeline ---
         case 'process-timeline':
@@ -816,17 +995,19 @@ export default function CaseStudy() {
                             {/* Content Column */}
                             <div className="lg:col-span-9 p-8 lg:p-16">
                                 {project.sections.map((section, i) => (
-                                    <div key={i} className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                                    <div key={i} className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
                                         {/* Section Label (Left) */}
-                                        <div className="md:col-span-3">
-                                            {section.title && (
-                                                <span className="font-mono text-xs text-neon uppercase tracking-widest sticky top-32">
-                                                    {section.title}
-                                                </span>
-                                            )}
-                                        </div>
+                                        {!section.hideColumnTitle && (
+                                            <div className="md:col-span-3">
+                                                {section.title && (
+                                                    <span className="font-mono text-xs text-neon uppercase tracking-widest sticky top-32">
+                                                        {section.title}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
                                         {/* Section Body (Right) */}
-                                        <div className="md:col-span-9">
+                                        <div className={section.hideColumnTitle ? "md:col-span-12" : "md:col-span-9"}>
                                             <SectionRenderer section={section} />
                                         </div>
                                     </div>
