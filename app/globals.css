@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --void: #000000;
+    --charcoal: #0a0a0a;
+    --neon: #00FF94;
+    --ice: #FFFFFF;
+    --mist: #A1A1AA;
+}
+
+/* ============================================================================
+   CORE RESET & TYPOGRAPHY
+   ============================================================================ */
+
+body {
+    background-color: var(--void);
+    color: var(--ice);
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--neon);
+    color: var(--void);
+}
+
+/* ============================================================================
+   CUSTOM CURSOR (Preserved but updated)
+   ============================================================================ */
+
+* {
+    cursor: none !important;
+}
+
+@media (max-width: 768px) {
+    * {
+        cursor: auto !important;
+    }
+}
+
+/* ============================================================================
+   SCROLLBAR
+   ============================================================================ */
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--void);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--charcoal);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon);
+}
+
+/* ============================================================================
+   UTILITIES & EFFECTS
+   ============================================================================ */
+
+.text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    color: transparent;
+}
+
+.text-stroke-neon {
+    -webkit-text-stroke: 1px var(--neon);
+    color: transparent;
+}
+
+.glow-text {
+    text-shadow: 0 0 20px rgba(0, 255, 148, 0.5);
+}
+
+.noise-bg {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.animate-scanline {
+    animation: scanline 8s linear infinite;
+}
