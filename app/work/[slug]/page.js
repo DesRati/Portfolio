@@ -1,10 +1,10 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import Footer from '../../components/Footer';
 
@@ -87,6 +87,63 @@ const projects = {
                     { title: "Engineering Syncs", description: "I joined backend architecture reviews early. Understanding the 'Inheritance Model' in the database helped me design a UI that matched the reality of the code." },
                     { title: "Senior Stakeholders", description: "Engineers had varied opinions on flexibility vs performance. My role was to ground these debates in real customer scenarios (e.g., 'The Regional Manager Problem')." },
                     { title: "Iterative Logic", description: "We initially aimed for infinite nesting but found it confusing. I pivoted the design to a fixed 4-level hierarchy (Platform -> TMC -> Organization -> Entity) which simplified the UI significantly." }
+                ]
+            },
+
+            // 7. FINAL DESIGNS (VIDEO SHOWCASE)
+            {
+                type: 'prototype-player',
+                title: "THE FINAL EXPERIENCE",
+                description: "The redesigned flow allows admins to assign multiple roles and define granular scopes in a single, intuitive modal. No more navigating between 5 different screens.",
+                images: ["/images/rbac_flow_1.png", "/images/rbac_flow_2.png"]
+            },
+
+            // 8. RULE BUILDER CAROUSEL (IMAGES)
+            {
+                type: 'rule-builder-carousel',
+                items: [
+                    {
+                        title: "Role & Scope Entry",
+                        description: "The primary starting point for role assignment, allowing admins to clearly distinguish between 'Full Platform' and 'Conditional' access.",
+                        image: "/images/rule-carousel/v3_1.png",
+                        zoom: 1
+                    },
+                    {
+                        title: "Strict Rule Validation",
+                        description: "The core logic engine ensures that conditions are fully defined before allowing additional complexity, preventing malformed rule sets.",
+                        image: "/images/rule-carousel/v3_3.png",
+                        zoom: 1.3
+                    },
+                    {
+                        title: "Deep Dependency Awareness",
+                        description: "Our system understands the ripple effects of changes. Deleting a parent rule triggers a clear warning about nested child dependencies.",
+                        image: "/images/rule-carousel/v3_2.png",
+                        zoom: 1.25
+                    },
+                    {
+                        title: "Contextual Guidance",
+                        description: "Real-time tooltips guide users through valid attribute selections, ensuring that every rule remains logically sound and enforceable.",
+                        image: "/images/rule-carousel/v3_4.png",
+                        zoom: 1.3
+                    },
+                    {
+                        title: "Multi-layered Logic",
+                        description: "Accommodating complex enterprise needs with nested 'If / And' conditions that stay legible and manageable within the single-modal view.",
+                        image: "/images/rule-carousel/v3_5.png",
+                        zoom: 1.1
+                    },
+                    {
+                        title: "Rule Chain Integrity",
+                        description: "A secondary validation layer that prevents adding new conditions until the current chain is logically complete and valid.",
+                        image: "/images/rule-carousel/v3_6.png",
+                        zoom: 1.3
+                    },
+                    {
+                        title: "Scope Finalization",
+                        description: "Before assignment, the system enforces a final check on the entire scope block to ensure no orphaned or incomplete logic paths remain.",
+                        image: "/images/rule-carousel/v3_7.png",
+                        zoom: 1.3
+                    }
                 ]
             },
 
@@ -761,6 +818,176 @@ const StaticEmbed = ({ src, title, caption }) => {
     );
 };
 
+const PrototypePlayer = ({ images, title, description }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [cursorVariant, setCursorVariant] = useState("initial");
+
+    useEffect(() => {
+        let t1, t2, t3, t4;
+        const sequence = () => {
+            setActiveIndex(0);
+            setCursorVariant("initial");
+
+            t1 = setTimeout(() => setCursorVariant("target"), 1000);
+            t2 = setTimeout(() => setCursorVariant("click"), 2000);
+            t3 = setTimeout(() => {
+                setCursorVariant("modal");
+                setActiveIndex(1);
+            }, 2300);
+            t4 = setTimeout(sequence, 6000);
+        };
+
+        sequence();
+        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+    }, []);
+
+    const cursorVariants = {
+        initial: { left: "90%", top: "90%", opacity: 1, scale: 1 },
+        target: { left: "89%", top: "16%", opacity: 1, scale: 1, transition: { duration: 1, ease: "easeInOut" } },
+        click: { left: "89%", top: "16%", opacity: 1, scale: 0.9, transition: { duration: 0.1 } },
+        modal: { left: "89%", top: "16%", opacity: 0, scale: 1, transition: { duration: 0.2 } }
+    };
+
+    return (
+        <div className="mb-32">
+            <div className="mb-12">
+                <h2 className="font-display text-4xl md:text-5xl text-ice mb-6 leading-tight">{title}</h2>
+                <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p>
+            </div>
+
+            <div className="relative rounded-xl overflow-hidden border border-white/10 bg-transparent shadow-2xl group w-full">
+                {/* Background Images */}
+                {images.map((src, i) => (
+                    <motion.div
+                        key={i}
+                        className={`${i === 0 ? 'relative' : 'absolute inset-0'} w-full`}
+                        initial={{ opacity: i === 0 ? 1 : 0 }}
+                        animate={{ opacity: activeIndex === i ? 1 : 0 }}
+                        transition={{ duration: 0.4 }}
+                    >
+                        <img src={src} alt="" className="w-full h-auto block" />
+                    </motion.div>
+                ))}
+
+                {/* Cursor */}
+                <motion.div
+                    className="absolute w-6 h-6 z-50 pointer-events-none drop-shadow-xl"
+                    variants={cursorVariants}
+                    animate={cursorVariant}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#F24E1E" stroke="white" strokeWidth="1.5" /></svg>
+                </motion.div>
+            </div>
+        </div>
+    );
+};
+
+const RuleBuilderCarousel = ({ items }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [paused, setPaused] = useState(false);
+
+    useEffect(() => {
+        if (paused) return;
+        const interval = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % items.length);
+        }, 12000); // 12 seconds per step
+        return () => clearInterval(interval);
+    }, [items.length, paused]);
+
+    return (
+        <div
+            className="mb-40 w-full"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+        >
+            <div className="flex flex-col gap-10">
+                {/* Header Area */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+                    <div className="max-w-xl flex-1 min-h-[140px] flex flex-col justify-end">
+                        <h3 className="font-mono text-neon text-[10px] tracking-[0.4em] mb-4 uppercase opacity-60">Interaction Details</h3>
+                        <div className="relative h-24 overflow-visible">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeIndex}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="absolute inset-0"
+                                >
+                                    <h4 className="text-3xl font-display text-ice mb-3 uppercase tracking-tight line-clamp-1">{items[activeIndex].title}</h4>
+                                    <p className="text-lg text-mist/80 font-light leading-relaxed line-clamp-2">{items[activeIndex].description}</p>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
+
+                    <div className="flex gap-1.5 pb-2">
+                        {items.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setActiveIndex(i)}
+                                className="group relative flex flex-col gap-3"
+                            >
+                                <div className={`h-1 rounded-full transition-all duration-500 ${activeIndex === i ? 'w-12 bg-neon' : 'w-4 bg-white/10 group-hover:bg-white/20'}`} />
+                                <span className={`font-mono text-[9px] transition-colors ${activeIndex === i ? 'text-neon' : 'text-mist/20'}`}>0{i + 1}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-black rounded-2xl border border-white/10 overflow-hidden shadow-3xl group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon/5 via-transparent to-transparent pointer-events-none" />
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeIndex}
+                            initial={{ opacity: 0, scale: items[activeIndex].zoom * 0.95 }}
+                            animate={{ opacity: 1, scale: items[activeIndex].zoom }}
+                            exit={{ opacity: 0, scale: items[activeIndex].zoom * 1.05 }}
+                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                            className="absolute inset-0 flex items-center justify-center p-1 md:p-4"
+                        >
+                            <img
+                                src={items[activeIndex].image}
+                                alt={items[activeIndex].title}
+                                className="w-full h-full object-contain drop-shadow-[0_20px_80px_rgba(0,0,0,1)]"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
+
+                    <div className="absolute inset-y-0 left-0 w-24 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)}
+                            className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon hover:text-charcoal transition-all"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                        </button>
+                    </div>
+                    <div className="absolute inset-y-0 right-0 w-24 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)}
+                            className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon hover:text-charcoal transition-all"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                        </button>
+                    </div>
+
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5">
+                        <motion.div
+                            key={activeIndex + paused}
+                            initial={{ width: "0%" }}
+                            animate={paused ? { width: "0%" } : { width: "100%" }}
+                            transition={{ duration: 12, ease: "linear" }}
+                            className="h-full bg-neon/80"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- SECTIONS ---
 
 const SectionRenderer = ({ section }) => {
@@ -852,7 +1079,15 @@ const SectionRenderer = ({ section }) => {
 
 
 
-        // --- NEW: Process Timeline ---
+        // --- NEW: Prototype Player ---
+        case 'prototype-player':
+            return <PrototypePlayer images={section.images} title={section.title} description={section.description} />;
+
+
+        // --- NEW: Rule Builder Carousel ---
+        case 'rule-builder-carousel':
+            return <RuleBuilderCarousel items={section.items} />;
+
         case 'process-timeline':
             return (
                 <div className="mb-32">
