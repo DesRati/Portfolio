@@ -54,6 +54,11 @@ const projects = {
                 header: "The Compliance Gap",
                 body: "Interviews with Implementation Managers revealing a critical pattern: Compliance teams needed 'Read-Only' visibility into sensitive settings without 'Edit' rights. Our legacy system didn't support this distinction, creating major security risks for public companies."
             },
+            {
+                type: 'framed-media',
+                src: "/images/rbac_flow_4.gif",
+                caption: "Synthesis: Mapping critical patterns and user needs identified during stakeholder interviews."
+            },
 
             // 4. DESIGN FRAMEWORK
             {
@@ -174,94 +179,109 @@ const projects = {
     },
     'navigation-restructure': {
         hero: {
-            title: "SIDE NAV & IA",
-            subtitle: "Taming the Information Sprawl",
-            gradient: "linear-gradient(45deg, #00C6FF, #0072FF)",
+            title: "SIDE NAVIGATION & IA",
+            subtitle: "Scalable, Role-Aware Navigation",
+            gradient: "linear-gradient(45deg, #00FFA3, #00D1FF)",
             links: [
-                { label: "Live Demo", url: "https://spotnana.com" }
+                { label: "Spotnana Platform", url: "https://www.spotnana.com" }
             ]
         },
         meta: [
-            { label: "Role", value: "Principal Designer" },
-            { label: "Team", value: "2 Designers, 6 Engineers" },
-            { label: "Timeline", value: "4 Months" },
-            { label: "Impact", value: "+22% Discovery Rate" }
+            { label: "Role", value: "Lead Product Designer" },
+            { label: "Focus", value: "IA / Component Design / RBAC" },
+            { label: "Timeline", value: "3 Months" },
+            { label: "Impact", value: "Platform-wide Standard" }
         ],
         sections: [
-            // 1. ROLE CARD
-
-            // 2. PROBLEM
+            // 1. EXECUTIVE SUMMARY
             {
                 type: 'text-row',
-                title: "THE PROBLEM",
-                header: "Scale vs. Usability",
-                body: "As the Spotnana platform grew from a simple booking tool to a comprehensive travel management suite, our navigation broke. We had 4 levels of nesting, 'mystery meat' icons, and no consistent place for secondary actions. Users were getting lost in the 'Hamburger Menu of Doom'."
+                title: "EXECUTIVE SUMMARY",
+                header: "Modular Foundations for Platform Growth",
+                body: "I led the design of a modular side navigation component that unified fragmented admin settings and reduced friction. By consolidating TMC and company settings into a single menu structure, we established a scalable framework that adapts to user roles (RBAC) and is now a platform-wide standard."
             },
-
-            // 3. USER VOICE
             {
-                type: 'quote',
-                text: "I spend 30 seconds just trying to find the 'Policy' tab every single time. It keeps moving.",
-                author: "Beta User Feedback"
+                type: 'framed-media',
+                title: "LEGACY SYSTEM",
+                src: "/images/side-nav/side-nav-old.png",
+                caption: "The Legacy Navigation: Frequent context switching required moving across disconnected settings pages.",
+                hideColumnTitle: true
             },
 
-            // 4. AUDIT
-            {
-                type: 'text-row',
-                title: "AUDIT",
-                header: "Heatmap Analysis",
-                body: "We analyzed 50,000 sessions using FullStory. The data was clear: 80% of clicks were concentrated on just 3 menu items (Trips, Book, Approvals). The other 62 items were creating 'cognitive noise', leading to accidental clicks and 'rage-clicking' on the back button."
-            },
-
-            // 5. DEFINITION
+            // 2. THE PROBLEM
             {
                 type: 'grid-problem-solution',
-                problem: "The Legacy IA: A single flat list that tried to be everything for everyone. Admins saw Traveler tools (irrelevant) and Travelers saw broken Admin links.",
-                solution: "The Concept: 'Context Switching'. We split the app into two distinct modes: 'Traveler Mode' (Personal) and 'Admin Mode' (Management). This cut the visible menu items by 50% for every user."
+                problem: "The legacy navigation was a patchwork of features with no clear information architecture. Admins struggled to switch between managing their own agency (TMC) and their clients (Company), leading to frequent navigation errors and 'lost' states.",
+                solution: "We needed a 'Single Source of Truth'—a navigation system that could intelligently filter content based on the user's current context, while providing a permanent anchor for global actions like organization switching."
             },
 
-            // 6. PRINCIPLES
+            // 3. RESEARCH
+            {
+                type: 'quote',
+                text: "I have to open three different tabs just to compare settings between two clients. It feels like I'm using two different products.",
+                author: "TMC Administrator"
+            },
             {
                 type: 'text-row',
-                title: "PRINCIPLES",
-                header: "The 3 Laws of Navigation",
-                body: "Before designing pixels, we agreed on three non-negotiables: 1. Predictability (Location never changes). 2. Density (High density for admins, low for travelers). 3. Keyboard First (Everything accessible via Command+K)."
+                title: "RESEARCH FINDINGS",
+                header: "Competitive vs. User Reality",
+                body: "Our audit revealed that while competitors used complex multi-tier menus, our users prized speed and context clarity. The 'Switching' action was the highest-frequency task, yet it was buried in a profile dropdown."
             },
+            { type: 'visual-handdrawn-table', hideColumnTitle: true },
 
-            // 7. PROCESS
+            // 4. DESIGN FRAMEWORK
             {
-                type: 'process-timeline',
-                title: "THE RESTRUCTURE",
-                steps: [
-                    { title: "Card Sorting", description: "Ran open card-sort studies with 30 admins to group 65+ navigation items into 5 logical clusters (Manage, Analyze, Configure, Support)." },
-                    { title: "Tree Testing", description: "Tested the new hierarchy with 200 users. 'Time to find Policy' dropped from 32s to 8s." },
-                    { title: "The 'Context' Rail", description: "Designed a slim 'Global Rail' for context switching (Travel vs Admin) and a wider 'Local Panel' for deep navigation." },
-                    { title: "Keyboard Speed", description: "Implemented 'Command+K' global search and logical tab-indexing for power users." }
-                ]
+                type: 'text-row',
+                title: "DESIGN FRAMEWORK",
+                header: "The IA Hierarchy",
+                body: "I redefined the mental model for navigation based on four distinct layers. This ensured that regardless of how many apps we added, the user always knew where they were and how to get back."
+            },
+            { type: 'visual-nav-hierarchy', hideColumnTitle: true },
+
+            // 5. EXPLORATION
+            {
+                type: 'text-row',
+                title: "CORE DESIGN DECISION",
+                header: "Dual-Tier vs. Flat Accordion",
+                body: "We explored two primary directions: a complex dual-tier rail and a familiar flat accordion. While the rail offered high visibility, it failed the 'Context Test'—users couldn't tell which Org they were in at a glance. The Flat Accordion, paired with a permanent Org Hub, won in usability testing."
+            },
+            { type: 'visual-annotated-comparison', hideColumnTitle: true },
+
+            // 6. BUILDING BLOCKS
+            {
+                type: 'text-row',
+                title: "BUILDING BLOCKS",
+                header: "Modular Anatomy",
+                body: "The final component was built as a three-part modular system: a fixed Org Selector header, a flexible core navigation area, and a support-focused footer."
+            },
+            { type: 'visual-modular-anatomy', hideColumnTitle: true },
+
+            // 7. FINAL PRODUCT
+            {
+                type: 'framed-media',
+                title: "THE FINAL COMPONENT",
+                src: "/images/side-nav/side-nav-main.png",
+                caption: "The production-ready side navigation with role-based filtering and the integrated Org Selector.",
+                hideColumnTitle: true
+            },
+            {
+                type: 'text-row',
+                header: "Measuring Success",
+                body: "Success wasn't just about the UI—it was about efficiency. We saw a 40% reduction in time-to-task for common admin actions and a complete elimination of support tickets related to 'lost' navigation states."
             },
 
-            // 7. EXPLORATION
-            { type: 'image-grid', title: "WIREFRAMES", items: [{ caption: "Navigation Tree Testing" }, { caption: "Interaction States" }, { caption: "Mobile Responsive Logic" }, { caption: "Search vs Browse" }] },
-
-            // 8. REFLECTION
+            // 8. LEARNINGS
             {
                 type: 'reflection-grid',
+                title: "LEARNINGS",
                 rights: [
-                    "Testing Early: Tree-testing proved our initial grouping was wrong before we wrote a line of code.",
-                    "Progressive Disclosure: Hiding 'Advanced Settings' by default reduced cognitive load for 90% of users."
+                    "Early integration with engineering ensured the IA hierarchy was technically feasible.",
+                    "The handwritten prototyping phase helped stakeholders focus on logic rather than polish.",
+                    "RBAC-first design saved months of later refactoring."
                 ],
                 wrongs: [
-                    "Icon Reliance: We assumed icons were enough. Users needed labels. We added a 'pinned expanded' mode."
-                ]
-            },
-
-            // 9. OUTCOME
-            {
-                type: 'stat-row',
-                stats: [
-                    { value: "22%", label: "Faster Task Completion" },
-                    { value: "5/5", label: "SUS Score" },
-                    { value: "60+", label: "Routes Mapped" }
+                    "Underestimated the difficulty of migrating 100+ legacy admin pages.",
+                    "Initially made the org selector too subtle, requiring a post-launch adjustment for better discoverability."
                 ]
             }
         ]
@@ -507,6 +527,45 @@ const KeyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 const GlobeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>;
 const BuildingIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M8 10h.01" /><path d="M16 10h.01" /><path d="M8 14h.01" /><path d="M16 14h.01" /><path d="M8 18h.01" /><path d="M16 18h.01" /></svg>;
 const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>;
+
+const FramedMedia = ({ src, caption }) => {
+    return (
+        <div className="mb-32">
+            <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl relative group">
+                <div className="h-10 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5 grayscale group-hover:grayscale-0 transition-all">
+                        <div className="w-3 h-3 rounded-full bg-[#FF5F57]/40 group-hover:bg-[#FF5F57]" />
+                        <div className="w-3 h-3 rounded-full bg-[#FEBC2E]/40 group-hover:bg-[#FEBC2E]" />
+                        <div className="w-3 h-3 rounded-full bg-[#28C840]/40 group-hover:bg-[#28C840]" />
+                    </div>
+                    <div className="flex-1 text-center">
+                        <div className="inline-block px-3 py-0.5 rounded-full bg-white/5 text-[10px] font-mono text-mist/50 select-none">spotnana.app/admin/permissions</div>
+                    </div>
+                </div>
+                <div className="relative bg-void flex items-center justify-center overflow-hidden">
+                    <img
+                        src={src}
+                        alt={caption || "Interface Demo"}
+                        className="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-700 will-change-transform"
+                        style={{
+                            imageRendering: 'auto',
+                            WebkitBackfaceVisibility: 'hidden',
+                            WebkitTransformStyle: 'preserve-3d'
+                        }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+                </div>
+            </div>
+            {caption && (
+                <div className="mt-6 flex items-center justify-center gap-3">
+                    <div className="w-8 h-px bg-white/10" />
+                    <p className="text-xs font-mono text-mist uppercase tracking-widest">{caption}</p>
+                    <div className="w-8 h-px bg-white/10" />
+                </div>
+            )}
+        </div>
+    );
+};
 
 const RBACEquationVisual = () => (
     <div className="w-full relative bg-[#1e1e1e] border border-[#333] rounded-3xl p-8 lg:p-12 overflow-hidden select-none">
@@ -1044,6 +1103,212 @@ const RuleBuilderCarousel = ({ items }) => {
 
 // --- SECTIONS ---
 
+// --- NAVIGATION STUDY COMPONENTS ---
+
+const HanddrawnTable = () => {
+    const rows = [
+        { feature: "Single Source of Truth", compA: "Fragmented settings", compB: "Confusing menus", opp: "Unified Hub" },
+        { feature: "Role-Aware Visibility", compA: "No visibility levels", compB: "Flat permissions", opp: "Global Org Selector" },
+        { feature: "Modular Anatomy", compA: "Fixed layout", compB: "Inconsistent UI", opp: "Scalable System" }
+    ];
+
+    return (
+        <div className="font-handdrawn overflow-x-auto py-8">
+            <table className="min-w-full border-collapse">
+                <thead>
+                    <tr className="border-b-2 border-white/20">
+                        <th className="p-4 text-left text-neon text-xl">Key Feature</th>
+                        <th className="p-4 text-left text-mist/60 text-lg">Competitor A</th>
+                        <th className="p-4 text-left text-mist/60 text-lg">Competitor B</th>
+                        <th className="p-4 text-left text-neon text-xl font-bold italic">OUR OPPORTUNITY</th>
+                    </tr>
+                </thead>
+                <tbody className="text-mist">
+                    {rows.map((row, i) => (
+                        <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                            <td className="p-4 text-ice text-lg">{row.feature}</td>
+                            <td className="p-4 opacity-50">{row.compA}</td>
+                            <td className="p-4 opacity-50">{row.compB}</td>
+                            <td className="p-4 text-neon font-bold text-lg italic">{row.opp}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+const NavHierarchyDiagram = () => {
+    return (
+        <div className="font-handdrawn py-12 flex flex-col items-center gap-4">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="w-64 p-6 border-2 border-neon text-neon text-center rounded-sm rotate-1 translate-x-2"
+            >
+                <div className="text-2xl font-bold">DOMAIN / PLATFORM</div>
+                <div className="text-sm opacity-70">Top Level Navigation</div>
+            </motion.div>
+            <div className="h-10 w-px bg-neon/40 -translate-x-4" />
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="w-56 p-5 border-2 border-ice text-ice text-center rounded-sm -rotate-1"
+            >
+                <div className="text-xl">ORGANIZATION</div>
+                <div className="text-xs opacity-60">Custom Branding / Policies</div>
+            </motion.div>
+            <div className="h-10 w-px bg-ice/40 translate-x-3" />
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="w-48 p-4 border border-mist text-mist text-center rounded-sm rotate-2"
+            >
+                <div className="text-lg">WORKSPACE</div>
+                <div className="text-xs opacity-50">Operational Context</div>
+            </motion.div>
+            <div className="h-10 w-px bg-mist/40 -translate-x-2" />
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="w-40 p-3 border border-mist/50 text-mist/60 text-center rounded-sm -rotate-2"
+            >
+                <div className="text-md">FEATURE / APP</div>
+                <div className="text-xs opacity-40">The Work Area</div>
+            </motion.div>
+        </div>
+    );
+};
+
+const ModularAnatomyDiagram = () => {
+    return (
+        <div className="font-handdrawn py-12 flex flex-col items-center gap-16">
+            <div className="relative w-full max-w-4xl aspect-[16/10] bg-void/50 rounded-3xl border border-white/5 overflow-hidden flex items-center justify-center p-8 group">
+                {/* Background Grid Accent */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                    style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+                />
+
+                <svg viewBox="0 0 800 500" className="w-full h-full relative z-10 drop-shadow-2xl font-handdrawn">
+                    {/* Overall Sidebar Container */}
+                    <motion.rect
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        x="300" y="50" width="200" height="400"
+                        rx="24" fill="rgba(255,255,255,0.03)"
+                        stroke="rgba(255,255,255,0.2)" strokeWidth="2"
+                    />
+
+                    {/* <Sidebar /> Identifier */}
+                    <motion.g initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}>
+                        <text x="180" y="80" fill="white" className="text-xl font-bold tracking-tight">&lt;Sidebar /&gt;</text>
+                        <path d="M285 75 Q300 75 300 65" stroke="white" strokeWidth="2" fill="none" strokeDasharray="4 4" />
+                    </motion.g>
+
+                    {/* <SidebarHeader /> (Blue) */}
+                    <motion.g
+                        initial={{ opacity: 0, y: -10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="cursor-pointer group/header"
+                    >
+                        <rect x="310" y="65" width="180" height="60" rx="12" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" strokeWidth="3" />
+                        <motion.text x="515" y="100" fill="#3B82F6" className="text-lg font-bold">&lt;SidebarHeader /&gt;</motion.text>
+                        <text x="515" y="120" fill="gray" className="text-sm">(Sticky)</text>
+                        <path d="M510 95 L495 95" stroke="#3B82F6" strokeWidth="2" fill="none" />
+                    </motion.g>
+
+                    {/* <SidebarContent /> (Green) */}
+                    <motion.g
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <rect x="310" y="135" width="180" height="230" rx="12" fill="rgba(34,197,94,0.1)" stroke="#22C55E" strokeWidth="3" />
+                        <text x="515" y="250" fill="#22C55E" className="text-lg font-bold">&lt;SidebarContent /&gt;</text>
+                        <text x="515" y="270" fill="gray" className="text-sm">(Scrollable)</text>
+                    </motion.g>
+
+                    {/* <SidebarGroup /> (Yellow) */}
+                    <motion.g
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="cursor-pointer group/group"
+                    >
+                        <rect x="325" y="150" width="150" height="90" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
+                        <rect x="325" y="250" width="150" height="100" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
+
+                        <text x="130" y="260" fill="#EAB308" className="text-lg font-bold">&lt;SidebarGroup /&gt;</text>
+                        <path d="M285 255 L320 255" stroke="#EAB308" strokeWidth="2" fill="none" />
+                    </motion.g>
+
+                    {/* <SidebarFooter /> (Red) */}
+                    <motion.g
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
+                    >
+                        <rect x="310" y="375" width="180" height="60" rx="12" fill="rgba(239,68,68,0.15)" stroke="#EF4444" strokeWidth="3" />
+                        <text x="515" y="410" fill="#EF4444" className="text-lg font-bold">&lt;SidebarFooter /&gt;</text>
+                        <text x="515" y="430" fill="gray" className="text-sm">(Sticky)</text>
+                        <path d="M510 405 L495 405" stroke="#EF4444" strokeWidth="2" fill="none" />
+                    </motion.g>
+                </svg>
+
+                {/* Floating Aesthetic Labels */}
+                <div className="absolute bottom-8 left-8 flex items-center gap-4 text-xs font-mono text-mist/30 uppercase tracking-[0.3em]">
+                    <div className="w-12 h-[1px] bg-mist/20" />
+                    Architecture Blueprint v2.0
+                </div>
+            </div>
+
+
+        </div>
+    );
+};
+
+const AnnotatedComparison = () => {
+    return (
+        <div className="font-handdrawn py-12 flex flex-col gap-24">
+            {/* Option A: Dual-Tier (media 1) */}
+            <div className="relative group max-w-5xl mx-auto w-full">
+                <div className="absolute -top-6 left-8 bg-white/10 backdrop-blur-md text-ice border border-white/20 px-6 py-2 rotate-[-1deg] text-xl font-bold z-10 shadow-2xl">Direction A: Dual-Tier Rail</div>
+                <div className="border border-white/10 rounded-2xl overflow-hidden transition-all duration-700 shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
+                    <img src="/images/side-nav/uploaded_media_1.png" alt="Dual-Tier Rail" className="w-full opacity-90 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="mt-8 p-6 border-l-4 border-white/20 bg-white/5 rounded-r-2xl max-w-2xl">
+                    <div className="text-ice text-2xl font-bold mb-3">Dual-Tier Exploration</div>
+                    <ul className="text-mist space-y-2 text-lg">
+                        <li>- High cognitive overhead for specialized operations</li>
+                        <li>- Distant visual relationship with Organization context</li>
+                        <li>- Inefficient vertical space usage for complex sub-menus</li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Option B: Flat Accordion (media 0) */}
+            <div className="relative group max-w-5xl mx-auto w-full">
+                <div className="absolute -top-6 right-8 bg-neon/90 text-charcoal px-6 py-2 rotate-[1deg] text-xl font-bold z-10 shadow-2xl shadow-neon/20">Direction B: Flat Accordion (Selected)</div>
+                <div className="border-2 border-neon/30 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,255,163,0.1)] group-hover:shadow-[0_0_80px_rgba(0,255,163,0.2)] transition-all duration-700">
+                    <img src="/images/side-nav/uploaded_media_0.png" alt="Flat Accordion" className="w-full opacity-100" />
+                </div>
+                <div className="mt-8 p-6 border-l-4 border-neon/40 bg-neon/5 rounded-r-2xl max-w-2xl ml-auto text-right">
+                    <div className="text-neon text-2xl font-bold mb-3">Flat Accordion with Hub</div>
+                    <ul className="text-mist space-y-2 text-lg inline-block text-left">
+                        <li>- Clear, logical context hierarchy for all users</li>
+                        <li>- Scales linearly for any number of child applications</li>
+                        <li>- Superior accessibility (A11y) and keyboard navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const SectionRenderer = ({ section }) => {
     switch (section.type) {
         case 'iframe-embed':
@@ -1127,6 +1392,10 @@ const SectionRenderer = ({ section }) => {
         case 'visual-rbac-roles': return <div className="mb-32"><RBACRolesVisual /></div>;
         case 'visual-evolution': return <div className="mb-32"><EvolutionVisual /></div>;
 
+        // --- NEW: Framed Media (for GIFs/Images) ---
+        case 'framed-media':
+            return <FramedMedia src={section.src} caption={section.caption} />;
+
         // --- NEW: Static Embed (Clean, no resize) ---
         case 'static-embed':
             return <StaticEmbed src={section.src} title={section.title} caption={section.caption} />;
@@ -1204,10 +1473,21 @@ const SectionRenderer = ({ section }) => {
                 <div className="mb-32">
                     <div className="grid md:grid-cols-2 gap-4">
                         {section.items.map((item, i) => (
-                            <div key={i} className="bg-[#111] border border-white/5 rounded-xl p-8 min-h-[300px] flex flex-col items-center justify-center text-center group hover:border-neon/30 transition-colors">
-                                <div className="text-4xl mb-4 opacity-20 group-hover:opacity-100 transition-opacity">🖼️</div>
-                                <div className="text-white font-medium mb-2">{item.caption}</div>
-                                <div className="text-xs text-gray-500 font-mono uppercase">Image Placeholder</div>
+                            <div key={i} className="bg-[#111] border border-white/5 rounded-xl overflow-hidden group hover:border-neon/30 transition-colors">
+                                {item.image ? (
+                                    <div className="aspect-video relative overflow-hidden">
+                                        <img src={item.image} alt={item.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span className="text-white text-sm font-medium">{item.caption}</span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="p-8 min-h-[300px] flex flex-col items-center justify-center text-center">
+                                        <div className="text-4xl mb-4 opacity-20 group-hover:opacity-100 transition-opacity">🖼️</div>
+                                        <div className="text-white font-medium mb-2">{item.caption}</div>
+                                        <div className="text-xs text-gray-500 font-mono uppercase">Image Placeholder</div>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -1226,6 +1506,11 @@ const SectionRenderer = ({ section }) => {
                     ))}
                 </div>
             );
+
+        case 'visual-handdrawn-table': return <div className="mb-32"><HanddrawnTable /></div>;
+        case 'visual-nav-hierarchy': return <div className="mb-32"><NavHierarchyDiagram /></div>;
+        case 'visual-modular-anatomy': return <div className="mb-32"><ModularAnatomyDiagram /></div>;
+        case 'visual-annotated-comparison': return <div className="mb-32"><AnnotatedComparison /></div>;
 
         default: return null;
     }

@@ -1,4 +1,4 @@
-import { Oswald, Manrope } from 'next/font/google'
+import { Oswald, Manrope, Architects_Daughter } from 'next/font/google'
 import CustomCursor from './components/CustomCursor'
 import './globals.css'
 
@@ -15,6 +15,13 @@ const oswald = Oswald({
     weight: ['200', '400', '500', '700'], // Light to Bold for editorial feel
 })
 
+const handdrawn = Architects_Daughter({
+    subsets: ['latin'],
+    variable: '--font-handdrawn',
+    weight: '400',
+    display: 'swap',
+})
+
 export const metadata = {
     title: 'RATI AGARWAL [2026] | PRODUCT DESIGN',
     description: 'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
@@ -23,7 +30,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" className={`${manrope.variable} ${oswald.variable}`}>
+        <html lang="en" className={`${manrope.variable} ${oswald.variable} ${handdrawn.variable}`}>
             <body className="font-sans antialiased bg-void text-ice selection:bg-neon selection:text-void overflow-x-hidden">
                 <CustomCursor />
                 {children}
