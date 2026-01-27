@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
@@ -22,7 +23,7 @@ const projects = {
         meta: [
             { label: "Role", value: "Product Designer" },
             { label: "Timeline", value: "2025" },
-            { label: "Team", value: "Cross-functional (Eng, Product, Design)" },
+            { label: "Team", value: "Cross-functional" },
             { label: "Result", value: "Enterprise Scalability" }
         ],
         sections: [
@@ -51,7 +52,7 @@ const projects = {
                 type: 'text-row',
                 title: "RESEARCH & DISCOVERY",
                 header: "The Compliance Gap",
-                body: "Interviews with Implementation Managers revealing a critical pattern: Compliance teams needed 'Read-Only' visibility into sensitive settings without 'Edit' rights. Our legacy system didn't support this distinction, creating major security risks for public companies."
+                body: "Interviews with Implementation Managers revealing a critical pattern: Compliance teams needed 'Read-Only' visibility into sensitive settings without 'Edit' rights. This distinction was key to unblocking deals with public companies."
             },
 
             // 4. DESIGN FRAMEWORK
@@ -85,8 +86,8 @@ const projects = {
                 title: "PROCESS & COLLABORATION",
                 steps: [
                     { title: "Engineering Syncs", description: "I joined backend architecture reviews early. Understanding the 'Inheritance Model' in the database helped me design a UI that matched the reality of the code." },
-                    { title: "Senior Stakeholders", description: "Engineers had varied opinions on flexibility vs performance. My role was to ground these debates in real customer scenarios (e.g., 'The Regional Manager Problem')." },
-                    { title: "Iterative Logic", description: "We initially aimed for infinite nesting but found it confusing. I pivoted the design to a fixed 4-level hierarchy (Platform -> TMC -> Organization -> Entity) which simplified the UI significantly." }
+                    { title: "Senior Stakeholders", description: "Engineers had varied opinions on flexibility vs performance. My role was to ground these debates in real customer scenarios." },
+                    { title: "Iterative Logic", description: "We initially aimed for infinite nesting but found it confusing. I pivoted the design to a fixed 4-level hierarchy which simplified the UI significantly." }
                 ]
             },
 
@@ -103,51 +104,51 @@ const projects = {
                 type: 'rule-builder-carousel',
                 items: [
                     {
-                        title: "Role & Scope Entry",
-                        description: "The primary starting point for role assignment, allowing admins to clearly distinguish between 'Full Platform' and 'Conditional' access.",
+                        title: "Full Platform Access",
+                        description: "Admins can see the entire permission set at a glance. The 'Global' toggle instantly enables all features, bypassing granular selection.",
                         image: "/images/rule-carousel/v3_1.png",
-                        zoom: 1
+                        spotlight: { x: 20, y: 35 },
+                        zoom: 2
                     },
                     {
-                        title: "Strict Rule Validation",
-                        description: "The core logic engine ensures that conditions are fully defined before allowing additional complexity, preventing malformed rule sets.",
-                        image: "/images/rule-carousel/v3_3.png",
-                        zoom: 1.3
-                    },
-                    {
-                        title: "Deep Dependency Awareness",
-                        description: "Our system understands the ripple effects of changes. Deleting a parent rule triggers a clear warning about nested child dependencies.",
+                        title: "Conditional Access",
+                        description: "Granular control allows specific constraints. Admins can mix-and-match roles with specific scopes, rather than binary all-or-nothing access.",
                         image: "/images/rule-carousel/v3_2.png",
-                        zoom: 1.25
+                        spotlight: { x: 75, y: 45 },
+                        zoom: 2.5
                     },
                     {
-                        title: "Contextual Guidance",
-                        description: "Real-time tooltips guide users through valid attribute selections, ensuring that every rule remains logically sound and enforceable.",
+                        title: "Sequential Entry",
+                        description: "Validation ensures logic integrity. The system enforces a step-by-step entry flow, preventing incomplete or ambiguous rule sets.",
+                        image: "/images/rule-carousel/v3_3.png",
+                        spotlight: { x: 50, y: 60 },
+                        zoom: 3
+                    },
+                    {
+                        title: "Dependency Warning",
+                        description: "Safety checks prevent orphan logic. Deleting a parent condition alerts the admin to review and resolve any impacted child dependencies.",
                         image: "/images/rule-carousel/v3_4.png",
-                        zoom: 1.3
+                        spotlight: { x: 85, y: 25 },
+                        zoom: 2.5
                     },
                     {
-                        title: "Multi-layered Logic",
-                        description: "Accommodating complex enterprise needs with nested 'If / And' conditions that stay legible and manageable within the single-modal view.",
+                        title: "Smart Auto-Selection",
+                        description: "The system anticipates the user's intent. When only one valid field exists for a condition, it's auto-selected to reduce clicks and cognitive load.",
                         image: "/images/rule-carousel/v3_5.png",
-                        zoom: 1.1
+                        spotlight: { x: 40, y: 50 },
+                        zoom: 2
                     },
                     {
-                        title: "Rule Chain Integrity",
-                        description: "A secondary validation layer that prevents adding new conditions until the current chain is logically complete and valid.",
-                        image: "/images/rule-carousel/v3_6.png",
-                        zoom: 1.3
-                    },
-                    {
-                        title: "Scope Finalization",
-                        description: "Before assignment, the system enforces a final check on the entire scope block to ensure no orphaned or incomplete logic paths remain.",
+                        title: "Scope Validation",
+                        description: "Scope definitions are strictly validated. Admins must fully define the 'Where' before saving, ensuring no permission is left undefined.",
                         image: "/images/rule-carousel/v3_7.png",
-                        zoom: 1.3
+                        spotlight: { x: 50, y: 85 },
+                        zoom: 2
                     }
                 ]
             },
 
-            // 7. OUTCOMES
+            // 9. OUTCOMES
             {
                 type: 'stat-row',
                 stats: [
@@ -158,7 +159,7 @@ const projects = {
                 ]
             },
 
-            // 8. LEARNINGS
+            // 10. LEARNINGS
             {
                 type: 'reflection-grid',
                 rights: [
@@ -507,186 +508,7 @@ const GlobeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" heigh
 const BuildingIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01" /><path d="M16 6h.01" /><path d="M8 10h.01" /><path d="M16 10h.01" /><path d="M8 14h.01" /><path d="M16 14h.01" /><path d="M8 18h.01" /><path d="M16 18h.01" /></svg>;
 const BriefcaseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>;
 
-const RBACEquationVisual = () => (
-    <div className="w-full relative bg-[#1e1e1e] border border-[#333] rounded-3xl p-8 lg:p-12 overflow-hidden select-none">
-        {/* Infinite Canvas Dot Pattern */}
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#888 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
-        <div className="relative z-10 flex flex-col flex-wrap lg:flex-nowrap items-center justify-center gap-8 min-h-[400px]">
-
-            <div className="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
-                {/* Sticky Note: User */}
-                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
-                    <div className="w-40 h-40 bg-[#FFD02F] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
-                        <div className="scale-125 mb-3 opacity-80"><UserIcon /></div>
-                        <div className="font-display text-xl font-bold">User</div>
-                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The Who"</div>
-                    </div>
-                    {/* Fake Cursor */}
-                    <div className="absolute -top-3 -left-3 z-30 pointer-events-none animate-pulse">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#F24E1E" stroke="white" strokeWidth="1" /></svg>
-                        <div className="bg-[#F24E1E] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Admin</div>
-                    </div>
-                </div>
-
-                {/* Connector */}
-                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">+</div>
-
-                {/* Sticky Note: Role */}
-                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[1deg] hover:rotate-0 transition-transform duration-300">
-                    <div className="w-40 h-40 bg-[#E0B6FF] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
-                        <div className="scale-125 mb-3 opacity-80"><ShieldIcon /></div>
-                        <div className="font-display text-xl font-bold">Role</div>
-                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The What"</div>
-                    </div>
-                    {/* Fake Cursor */}
-                    <div className="absolute -bottom-3 -right-3 z-30 pointer-events-none">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg transform rotate-180"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#0D99FF" stroke="white" strokeWidth="1" /></svg>
-                        <div className="bg-[#0D99FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-tl-lg rounded-bl-lg rounded-br-lg shadow-sm mr-2 -mt-1">Report Admin</div>
-                    </div>
-                </div>
-
-                {/* Connector */}
-                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">+</div>
-
-                {/* Sticky Note: Scope */}
-                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
-                    <div className="w-40 h-40 bg-[#69F0AE] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
-                        <div className="scale-125 mb-3 opacity-80"><TargetIcon /></div>
-                        <div className="font-display text-xl font-bold">Scope</div>
-                        <div className="font-serif italic text-sm opacity-70 mt-2 text-center leading-tight">"The Where"</div>
-                    </div>
-                    {/* Fake Cursor */}
-                    <div className="absolute top-0 right-0 z-30 pointer-events-none animate-bounce duration-1000">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#9747FF" stroke="white" strokeWidth="1" /></svg>
-                        <div className="bg-[#9747FF] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Company</div>
-                    </div>
-                </div>
-
-                {/* Equals */}
-                <div className="text-[#555] opacity-50 text-3xl font-light font-handwriting">=</div>
-
-                {/* Sticky Note: Result */}
-                <div className="relative group cursor-grab active:cursor-grabbing hover:z-20 transform md:rotate-[2deg] hover:rotate-0 transition-transform duration-300">
-                    <div className="w-40 h-40 bg-[#FF9D9D] shadow-[8px_8px_0px_rgba(0,0,0,0.2)] rounded-sm flex flex-col items-center justify-center p-6 text-[#1e1e1e]">
-                        <div className="scale-125 mb-3 opacity-80"><KeyIcon /></div>
-                        <div className="font-display text-xl font-bold leading-none mb-1">Access</div>
-                        <div className="font-serif italic text-sm opacity-70 text-center leading-tight">"The Result"</div>
-                    </div>
-                    {/* Fake Cursor */}
-                    <div className="absolute -bottom-4 left-4 z-30 pointer-events-none">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="drop-shadow-lg"><path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19179L11.7841 12.3673H5.65376Z" fill="#00C19C" stroke="white" strokeWidth="1" /></svg>
-                        <div className="bg-[#00C19C] text-white text-[10px] font-bold px-2 py-0.5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-sm ml-2 -mt-1">Report Admins</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
-const RBACScopeVisual = () => (
-    <div className="w-full relative bg-[#050505] border border-white/5 rounded-3xl p-8 md:p-12 overflow-hidden">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-
-            <div className="order-2 md:order-1 relative">
-                <div className="absolute left-[15px] top-6 bottom-6 w-px bg-gradient-to-b from-white/5 via-white/20 to-white/5" />
-
-                <div className="space-y-4">
-                    {[
-                        { label: 'Platform', icon: GlobeIcon, active: false },
-                        { label: 'TMC Agency', icon: BuildingIcon, active: false },
-                        { label: 'Organization', icon: BriefcaseIcon, active: true },
-                        { label: 'Legal Entity', icon: null, text: 'LE', active: false },
-                        { label: 'Traveler', icon: UserIcon, active: false },
-                    ].map((item, i) => (
-                        <div key={i} className={`relative pl-12 transition-all duration-300 ${item.active ? 'opacity-100' : 'opacity-40 hover:opacity-100'}`}>
-                            {/* Dot on line */}
-                            <div className={`absolute left-[11px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border border-[#050505] transition-colors ${item.active ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]' : 'bg-white/10'}`} />
-
-                            <div className={`p-4 rounded-lg border flex items-center justify-between group ${item.active ? 'bg-blue-500/5 border-blue-500/20' : 'bg-[#111] border-white/5'}`}>
-                                <div className="flex items-center gap-3">
-                                    <div className={`text-${item.active ? 'blue-400' : 'mist'}`}>
-                                        {item.icon ? <item.icon /> : <span className="font-mono text-xs">{item.text}</span>}
-                                    </div>
-                                    <span className="text-sm font-medium text-white">{item.label}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="order-1 md:order-2">
-                <div className="inline-block mb-6 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-mist uppercase tracking-widest">
-                    Hierarchy
-                </div>
-                <h3 className="font-display text-3xl text-white mb-6">Waterfall Inheritance</h3>
-                <p className="text-mist leading-relaxed text-sm md:text-base">
-                    Access flows downwards. Granting permissions at the <span className="text-white font-medium">Organization</span> level automatically cascades to every <span className="text-mist">Legal Entity</span> and <span className="text-mist">Traveler</span> node below it.
-                </p>
-            </div>
-        </div>
-    </div>
-);
-
-const RBACRolesVisual = () => {
-    const roles = [
-        { name: "Trip Manager", desc: "Manage & approve bookings", scope: "Write", color: "bg-orange-500/20 text-orange-200" },
-        { name: "Reporting Admin", desc: "View spend analytics", scope: "Read", color: "bg-blue-500/20 text-blue-200" },
-        { name: "Company Admin", desc: "Full configuration access", scope: "Full", color: "bg-red-500/20 text-red-200" },
-        { name: "Card Manager", desc: "Unmask corporate cards", scope: "Secure", color: "bg-yellow-500/20 text-yellow-200" },
-        { name: "Integrator", desc: "HR feed synchronization", scope: "System", color: "bg-purple-500/20 text-purple-200" },
-        { name: "Auditor", desc: "Read-only compliance check", scope: "Read", color: "bg-blue-500/20 text-blue-200" },
-    ];
-
-    return (
-        <div className="w-full relative bg-[#191919] rounded-xl overflow-hidden border border-[#333]">
-            {/* Window Controls (Notion style) */}
-            <div className="flex items-center gap-2 p-4 border-b border-[#333] bg-[#202020]">
-                <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-                <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-                <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-                <div className="ml-4 text-xs font-sans text-stone-400">Roles Database</div>
-            </div>
-
-            <div className="p-0">
-                <div className="w-full text-left border-collapse">
-                    {/* Header */}
-                    <div className="grid grid-cols-12 px-4 py-3 border-b border-[#333] text-xs font-sans text-stone-500">
-                        <div className="col-span-4 pl-2">Aa Role Name</div>
-                        <div className="col-span-6 border-l border-[#333] pl-4">≡ Description</div>
-                        <div className="col-span-2 border-l border-[#333] pl-4">▼ Access</div>
-                    </div>
-
-                    {/* Rows */}
-                    {roles.map((role, i) => (
-                        <div key={i} className="grid grid-cols-12 px-4 py-3 border-b border-[#333] last:border-0 hover:bg-[#202020] transition-colors group">
-                            <div className="col-span-4 flex items-center gap-2 pl-2">
-                                <span className="text-stone-600 group-hover:text-stone-400 transition-colors">📄</span>
-                                <span className="font-sans text-sm text-stone-200 font-medium">{role.name}</span>
-                            </div>
-                            <div className="col-span-6 flex items-center pl-4 border-l border-[#333] border-dashed">
-                                <span className="font-sans text-sm text-stone-400">{role.desc}</span>
-                            </div>
-                            <div className="col-span-2 flex items-center pl-4 border-l border-[#333] border-dashed">
-                                <span className={`px-2 py-0.5 rounded text-[11px] font-sans font-medium ${role.color} whitespace-nowrap`}>
-                                    {role.scope}
-                                </span>
-                            </div>
-                        </div>
-                    ))}
-
-                    {/* Add New Row Placeholder */}
-                    <div className="grid grid-cols-12 px-4 py-3 text-stone-600 hover:bg-[#202020] transition-colors cursor-pointer">
-                        <div className="col-span-12 pl-2 flex items-center gap-2 text-sm font-sans">
-                            <span>+ New</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
 
 const EvolutionVisual = () => (
     <div className="w-full relative bg-charcoal border border-white/10 rounded-xl p-8 md:p-12 overflow-hidden">
@@ -884,111 +706,310 @@ const PrototypePlayer = ({ images, title, description }) => {
 
 const RuleBuilderCarousel = ({ items }) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [paused, setPaused] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const activeItem = items[activeIndex];
 
+    // Auto-play logic (only active when not hovered in inline, or maybe always auto-play in inline preview?)
+    // Let's keep auto-play for the inline preview to attract attention.
     useEffect(() => {
-        if (paused) return;
+        if (isFullScreen) return; // interactive mode is manual usually, or we can keep auto-play? User said "rotating". Let's pause auto-play in full screen to let user read, unless they just watch. Let's make it manual in full screen for control.
         const interval = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % items.length);
-        }, 12000); // 12 seconds per step
+        }, 5000); // Faster preview cycle
         return () => clearInterval(interval);
-    }, [items.length, paused]);
+    }, [items.length, isFullScreen]);
+
+    // Keyboard navigation
+    useEffect(() => {
+        if (!isFullScreen) return;
+        const handleKeyDown = (e) => {
+            if (e.key === 'ArrowRight') setActiveIndex((prev) => (prev + 1) % items.length);
+            if (e.key === 'ArrowLeft') setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+            if (e.key === 'Escape') setIsFullScreen(false);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isFullScreen, items.length]);
+
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
+
+    // Move portal logic to a safe check: Ensure document.body exists and we are mounted
+    const PortalModal = mounted && typeof document !== 'undefined' && document.body
+        ? createPortal(
+            <AnimatePresence>
+                {isFullScreen && (
+                    <motion.div
+                        key="full-screen-modal"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[99999] bg-[#050505] flex flex-col"
+                    >
+                        {/* Header / Close */}
+                        <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-start z-50 pointer-events-none">
+                            <div className="pointer-events-auto bg-black/50 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full">
+                                <span className="text-neon font-mono text-xs tracking-widest uppercase">Rule Builder Walkthrough</span>
+                            </div>
+                            <button
+                                onClick={() => setIsFullScreen(false)}
+                                className="pointer-events-auto p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/10 group"
+                            >
+                                <span className="sr-only">Close</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-90 transition-transform"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+
+                        {/* Main Stage - Centered Image */}
+                        <div className="flex-1 relative w-full h-full flex items-center justify-center p-4 lg:p-12 overflow-hidden">
+                            <motion.img
+                                key={activeItem.image}
+                                src={activeItem.image}
+                                alt={activeItem.title}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="max-w-full max-h-full object-contain shadow-2xl"
+                            />
+                        </div>
+
+                        {/* Bottom Control Bar */}
+                        <div className="w-full bg-[#0A0A0A] border-t border-white/10 p-6 lg:p-8 shrink-0 z-50">
+                            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 justify-between">
+
+                                {/* Text Content */}
+                                <div className="text-center md:text-left flex-1">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={activeIndex}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+                                                <div className="text-xs font-mono text-neon/80 uppercase tracking-widest">Step {activeIndex + 1} of {items.length}</div>
+                                            </div>
+                                            <h3 className="text-2xl font-display text-white mb-2">{activeItem.title}</h3>
+                                            <p className="text-mist text-lg">{activeItem.description}</p>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+
+                                {/* Controls */}
+                                <div className="flex items-center gap-4 shrink-0">
+                                    <button
+                                        onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)}
+                                        className="p-4 rounded-full border border-white/10 hover:bg-white/10 text-white transition-all active:scale-95"
+                                    >
+                                        ←
+                                    </button>
+                                    <div className="flex gap-2">
+                                        {items.map((_, i) => (
+                                            <button
+                                                key={i}
+                                                onClick={() => setActiveIndex(i)}
+                                                className={`h-2 rounded-full transition-all duration-300 ${i === activeIndex ? 'w-8 bg-neon' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                                            />
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)}
+                                        className="p-4 rounded-full border border-white/10 hover:bg-white/10 text-white transition-all active:scale-95"
+                                    >
+                                        →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>,
+            document.body
+        )
+        : null;
 
     return (
-        <div
-            className="mb-40 w-full"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-        >
-            <div className="flex flex-col gap-10">
-                {/* Header Area */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
-                    <div className="max-w-xl flex-1 min-h-[140px] flex flex-col justify-end">
-                        <h3 className="font-mono text-neon text-[10px] tracking-[0.4em] mb-4 uppercase opacity-60">Interaction Details</h3>
-                        <div className="relative h-24 overflow-visible">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={activeIndex}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="absolute inset-0"
-                                >
-                                    <h4 className="text-3xl font-display text-ice mb-3 uppercase tracking-tight line-clamp-1">{items[activeIndex].title}</h4>
-                                    <p className="text-lg text-mist/80 font-light leading-relaxed line-clamp-2">{items[activeIndex].description}</p>
-                                </motion.div>
-                            </AnimatePresence>
+        <>
+            {PortalModal}
+            {/* INLINE LAUNCHER (Revised: Subtle & Cinematic) */}
+            <div
+                className="mb-40 w-full group cursor-pointer relative"
+                onClick={() => setIsFullScreen(true)}
+            >
+                {/* Clean container with subtle border */}
+                <div className="relative w-full aspect-[16/9] lg:aspect-[2/1] bg-[#050505] border border-white/5 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 group-hover:border-neon/20 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.05)]">
+
+                    {/* Ambient Background Loop */}
+                    <div className="absolute inset-0 opacity-40 blur-[1px] group-hover:scale-105 group-hover:blur-sm transition-all duration-1000 ease-out">
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={activeItem.image}
+                                src={activeItem.image}
+                                alt=""
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1.5 }}
+                                className="w-full h-full object-cover"
+                            />
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Minimal Overlay - Focusing on Interaction */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors duration-500">
+                        <div className="flex flex-col items-center gap-4 transform transition-all duration-500 group-hover:-translate-y-1">
+
+                            {/* Iconic Play Button (Subtle Glass) */}
+                            <div className="w-16 h-16 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-neon group-hover:border-neon/50 group-hover:scale-110 transition-all duration-300 shadow-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-black transition-colors"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                            </div>
+
+                            {/* Minimal Label */}
+                            <div className="opacity-70 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-1">
+                                <span className="text-xs font-mono text-neon uppercase tracking-[0.2em] drop-shadow-md">Interactive Walkthrough</span>
+                                <span className="text-sm font-sans text-white/60 group-hover:text-white transition-colors">Click to explore full screen</span>
+                            </div>
                         </div>
                     </div>
-
-                    <div className="flex gap-1.5 pb-2">
-                        {items.map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setActiveIndex(i)}
-                                className="group relative flex flex-col gap-3"
-                            >
-                                <div className={`h-1 rounded-full transition-all duration-500 ${activeIndex === i ? 'w-12 bg-neon' : 'w-4 bg-white/10 group-hover:bg-white/20'}`} />
-                                <span className={`font-mono text-[9px] transition-colors ${activeIndex === i ? 'text-neon' : 'text-mist/20'}`}>0{i + 1}</span>
-                            </button>
-                        ))}
-                    </div>
                 </div>
+            </div>
+        </>
+    );
+};
 
-                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-black rounded-2xl border border-white/10 overflow-hidden shadow-3xl group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-neon/5 via-transparent to-transparent pointer-events-none" />
+// --- SECTIONS ---
 
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeIndex}
-                            initial={{ opacity: 0, scale: items[activeIndex].zoom * 0.95 }}
-                            animate={{ opacity: 1, scale: items[activeIndex].zoom }}
-                            exit={{ opacity: 0, scale: items[activeIndex].zoom * 1.05 }}
-                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="absolute inset-0 flex items-center justify-center p-1 md:p-4"
-                        >
-                            <img
-                                src={items[activeIndex].image}
-                                alt={items[activeIndex].title}
-                                className="w-full h-full object-contain drop-shadow-[0_20px_80px_rgba(0,0,0,1)]"
-                            />
-                        </motion.div>
-                    </AnimatePresence>
+/* --- NEW VISUAL COMPONENTS --- */
 
-                    <div className="absolute inset-y-0 left-0 w-24 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                            onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)}
-                            className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon hover:text-charcoal transition-all"
-                        >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
-                        </button>
-                    </div>
-                    <div className="absolute inset-y-0 right-0 w-24 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                            onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)}
-                            className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-neon hover:text-charcoal transition-all"
-                        >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
-                        </button>
-                    </div>
-
-                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5">
-                        <motion.div
-                            key={activeIndex + paused}
-                            initial={{ width: "0%" }}
-                            animate={paused ? { width: "0%" } : { width: "100%" }}
-                            transition={{ duration: 12, ease: "linear" }}
-                            className="h-full bg-neon/80"
-                        />
-                    </div>
+const RBACEquationVisual = () => {
+    return (
+        <div className="mb-32 p-8 md:p-16 border border-white/10 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent relative overflow-hidden group">
+            <div className="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 font-display text-2xl md:text-4xl text-ice">
+                <div className="flex flex-col items-center">
+                    <span className="text-neon drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">User Group</span>
+                    <span className="text-xs font-mono text-mist mt-2 text-center uppercase tracking-widest opacity-60">Who + What + Where</span>
+                </div>
+                <div className="text-mist/50">=</div>
+                <div className="p-6 border border-white/10 rounded-xl bg-black/20 backdrop-blur-sm flex flex-col items-center hover:border-neon/50 transition-colors">
+                    <span>Users</span>
+                    <span className="text-xs font-mono text-mist mt-2 uppercase tracking-widest text-[10px]">The People</span>
+                </div>
+                <div className="text-mist/50">+</div>
+                <div className="p-6 border border-white/10 rounded-xl bg-black/20 backdrop-blur-sm flex flex-col items-center hover:border-neon/50 transition-colors">
+                    <span>Roles</span>
+                    <span className="text-xs font-mono text-mist mt-2 uppercase tracking-widest text-[10px]">Permissions</span>
+                </div>
+                <div className="text-mist/50">+</div>
+                <div className="p-6 border border-white/10 rounded-xl bg-black/20 backdrop-blur-sm flex flex-col items-center hover:border-neon/50 transition-colors">
+                    <span>Scope</span>
+                    <span className="text-xs font-mono text-mist mt-2 uppercase tracking-widest text-[10px]">Context</span>
                 </div>
             </div>
         </div>
     );
 };
 
-// --- SECTIONS ---
+const RBACRolesVisual = () => {
+    const roles = [
+        { title: "Platform Admin", desc: "God mode access to all orgs" },
+        { title: "TMC Admin", desc: "Manage travel agency settings" },
+        { title: "Company Admin", desc: "Configure company policies" },
+        { title: "Traveler", desc: "Standard booking access" },
+        { title: "Arranger", desc: "Book on behalf of others" },
+        { title: "Finance", desc: "View spend reports only" }
+    ];
+
+    return (
+        <div className="mb-32">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {roles.map((role, i) => (
+                    <div key={i} className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors group">
+                        <div className="w-8 h-8 rounded-full bg-neon/10 flex items-center justify-center text-neon mb-4 group-hover:scale-110 transition-transform">
+                            <div className="w-2 h-2 rounded-full bg-current" />
+                        </div>
+                        <h4 className="font-display text-xl text-ice mb-2">{role.title}</h4>
+                        <p className="font-sans text-sm text-mist">{role.desc}</p>
+                    </div>
+                ))}
+            </div>
+            <p className="text-center font-mono text-xs text-mist mt-6 uppercase tracking-widest opacity-60">
+                + Read-Only variants for all Admin roles
+            </p>
+        </div>
+    );
+};
+
+const RBACScopeVisual = () => {
+    return (
+        <div className="mb-32 p-8 border border-white/10 rounded-2xl bg-[#050505] overflow-hidden relative min-h-[400px] flex items-center justify-center">
+            <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10" />
+            <div className="relative z-10 flex flex-col items-center w-full max-w-2xl">
+
+                {/* Level 1 */}
+                <div className="flex flex-col items-center">
+                    <div className="px-6 py-3 rounded-full border border-purple-500/50 bg-purple-500/10 text-purple-200 font-mono text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                        Platform
+                    </div>
+                    <div className="h-8 w-px bg-gradient-to-b from-purple-500/50 to-blue-500/50" />
+                </div>
+
+                {/* Level 2 */}
+                <div className="flex flex-col items-center">
+                    <div className="px-6 py-3 rounded-full border border-blue-500/50 bg-blue-500/10 text-blue-200 font-mono text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                        TMC (Agency)
+                    </div>
+                    <div className="h-8 w-px bg-gradient-to-b from-blue-500/50 to-neon/50" />
+                </div>
+
+                {/* Level 3 */}
+                <div className="relative w-full flex justify-center">
+                    {/* Connecting lines */}
+                    <div className="absolute top-0 left-1/2 -ml-px h-8 w-px bg-neon/50" />
+                    <div className="absolute top-8 left-[15%] right-[15%] h-px bg-neon/50" />
+                    <div className="absolute top-8 left-[15%] h-8 w-px bg-neon/50" />
+                    <div className="absolute top-8 right-[15%] h-8 w-px bg-neon/50" />
+                    <div className="absolute top-8 left-1/2 h-8 w-px bg-neon/50" />
+
+                    <div className="flex justify-between w-[80%] pt-16">
+                        {/* Node 3A */}
+                        <div className="flex flex-col items-center">
+                            <div className="px-4 py-2 rounded-full border border-neon/50 bg-neon/10 text-neon font-mono text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                Google
+                            </div>
+                        </div>
+                        {/* Node 3B */}
+                        <div className="flex flex-col items-center">
+                            <div className="px-4 py-2 rounded-full border border-neon/50 bg-neon/10 text-neon font-mono text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                Microsoft
+                            </div>
+                            <div className="h-6 w-px bg-gradient-to-b from-neon/50 to-emerald-500/50" />
+                            {/* Level 4 */}
+                            <div className="flex flex-col items-center">
+                                <div className="px-3 py-1.5 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-emerald-200 font-mono text-[10px] uppercase tracking-widest mt-0">
+                                    UK Entity
+                                </div>
+                            </div>
+                        </div>
+                        {/* Node 3C */}
+                        <div className="flex flex-col items-center">
+                            <div className="px-4 py-2 rounded-full border border-neon/50 bg-neon/10 text-neon font-mono text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                Uber
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const SectionRenderer = ({ section }) => {
     switch (section.type) {
@@ -999,9 +1020,18 @@ const SectionRenderer = ({ section }) => {
             return (
                 <div className={section.className || "mb-12"}>
                     <h2 className="font-display text-4xl md:text-5xl text-ice mb-6 leading-tight">{section.header}</h2>
-                    <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{section.body}</p>
+                    <div className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{section.body}</div>
                 </div>
             );
+
+        case 'visual-rbac-equation':
+            return <RBACEquationVisual />;
+
+        case 'visual-rbac-roles':
+            return <RBACRolesVisual />;
+
+        case 'visual-rbac-scope':
+            return <RBACScopeVisual />;
 
         case 'grid-problem-solution':
             return (
