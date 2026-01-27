@@ -39,6 +39,16 @@ body {
     }
 }
 
+.force-cursor-auto,
+.force-cursor-auto * {
+    cursor: auto !important;
+}
+
+.force-cursor-pointer,
+.force-cursor-pointer * {
+    cursor: pointer !important;
+}
+
 /* ============================================================================
    SCROLLBAR
    ============================================================================ */
