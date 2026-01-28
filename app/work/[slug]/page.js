@@ -233,10 +233,15 @@ const projects = {
             {
                 type: 'text-row',
                 title: "DESIGN FRAMEWORK",
-                header: "The IA Hierarchy",
-                body: "I redefined the mental model for navigation based on four distinct layers. This ensured that regardless of how many apps we added, the user always knew where they were and how to get back."
+                header: "Unified Navigation",
+                body: "Replaced fragmented settings with a single, context-aware tree. Users can now traverse the full hierarchy—Global, Org, and Workspace—without losing their place."
             },
-            { type: 'visual-nav-hierarchy', hideColumnTitle: true },
+            {
+                type: 'framed-media',
+                src: "/images/side-nav/nav-restructure.gif",
+                caption: "Live Prototype: Traversing the Hierarchy",
+                hideColumnTitle: true
+            },
 
             // 5. EXPLORATION
             {
@@ -258,16 +263,15 @@ const projects = {
 
             // 7. FINAL PRODUCT
             {
-                type: 'framed-media',
-                title: "THE FINAL COMPONENT",
-                src: "/images/side-nav/side-nav-main.png",
-                caption: "The production-ready side navigation with role-based filtering and the integrated Org Selector.",
-                hideColumnTitle: true
+                type: 'gif-showcase',
+                title: "EXPERIENCE PREVIEW",
+                src: "/images/side-nav/side-nav-new.gif",
+                description: "The production-ready side navigation with role-based filtering and the integrated Org Selector.",
             },
             {
                 type: 'text-row',
-                header: "Measuring Success",
-                body: "Success wasn't just about the UI—it was about efficiency. We saw a 40% reduction in time-to-task for common admin actions and a complete elimination of support tickets related to 'lost' navigation states."
+                header: "Target Outcomes",
+                body: "Currently in implementation. We are tracking success against two key KPIs: reducing time-to-task for lateral organization switching and eliminating support tickets related to 'lost' navigation states."
             },
 
             // 8. LEARNINGS
@@ -276,12 +280,12 @@ const projects = {
                 title: "LEARNINGS",
                 rights: [
                     "Early integration with engineering ensured the IA hierarchy was technically feasible.",
-                    "The handwritten prototyping phase helped stakeholders focus on logic rather than polish.",
+                    "The restructuring and prototyping phase helped stakeholders focus on logic rather than polish.",
                     "RBAC-first design saved months of later refactoring."
                 ],
                 wrongs: [
                     "Underestimated the difficulty of migrating 100+ legacy admin pages.",
-                    "Initially made the org selector too subtle, requiring a post-launch adjustment for better discoverability."
+                    "Initially made the org selector too subtle, requiring a post-design adjustment for better discoverability."
                 ]
             }
         ]
@@ -532,16 +536,7 @@ const FramedMedia = ({ src, caption }) => {
     return (
         <div className="mb-32">
             <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl relative group">
-                <div className="h-10 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
-                    <div className="flex gap-1.5 grayscale group-hover:grayscale-0 transition-all">
-                        <div className="w-3 h-3 rounded-full bg-[#FF5F57]/40 group-hover:bg-[#FF5F57]" />
-                        <div className="w-3 h-3 rounded-full bg-[#FEBC2E]/40 group-hover:bg-[#FEBC2E]" />
-                        <div className="w-3 h-3 rounded-full bg-[#28C840]/40 group-hover:bg-[#28C840]" />
-                    </div>
-                    <div className="flex-1 text-center">
-                        <div className="inline-block px-3 py-0.5 rounded-full bg-white/5 text-[10px] font-mono text-mist/50 select-none">spotnana.app/admin/permissions</div>
-                    </div>
-                </div>
+
                 <div className="relative bg-void flex items-center justify-center overflow-hidden">
                     <img
                         src={src}
@@ -941,6 +936,23 @@ const PrototypePlayer = ({ images, title, description }) => {
     );
 };
 
+const GifShowcase = ({ title, description, src }) => {
+    return (
+        <div className="mb-32">
+            <div className="mb-12">
+                {title && (
+                    <div className="font-mono text-xs text-neon uppercase tracking-widest mb-4">{title}</div>
+                )}
+                <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p>
+            </div>
+
+            <div className="relative rounded-xl overflow-hidden border border-white/10 bg-transparent shadow-2xl group w-full">
+                <img src={src} alt={title} className="w-full h-auto block" />
+            </div>
+        </div>
+    );
+};
+
 const RuleBuilderCarousel = ({ items }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isFullScreen, setIsFullScreen] = useState(false);
@@ -1184,6 +1196,12 @@ const NavHierarchyDiagram = () => {
 };
 
 const ModularAnatomyDiagram = () => {
+    // Phase control: Controlled by hover
+    const [isHovered, setIsHovered] = useState(false);
+
+    // Transitions
+    const fadeTransition = { duration: 0.4, ease: "easeInOut" };
+
     return (
         <div className="font-handdrawn py-12 flex flex-col items-center gap-16">
             <div className="relative w-full max-w-4xl aspect-[16/10] bg-void/50 rounded-3xl border border-white/5 overflow-hidden flex items-center justify-center p-8 group">
@@ -1193,70 +1211,117 @@ const ModularAnatomyDiagram = () => {
                 />
 
                 <svg viewBox="0 0 800 500" className="w-full h-full relative z-10 drop-shadow-2xl font-handdrawn">
+
+                    {/* --- STATIC FRAME --- */}
                     {/* Overall Sidebar Container */}
-                    <motion.rect
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        x="300" y="50" width="200" height="400"
-                        rx="24" fill="rgba(255,255,255,0.03)"
-                        stroke="rgba(255,255,255,0.2)" strokeWidth="2"
-                    />
+                    <rect x="300" y="50" width="200" height="400" rx="24" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
 
-                    {/* <Sidebar /> Identifier */}
-                    <motion.g initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}>
-                        <text x="180" y="80" fill="white" className="text-xl font-bold tracking-tight">&lt;Sidebar /&gt;</text>
-                        <path d="M285 75 Q300 75 300 65" stroke="white" strokeWidth="2" fill="none" strokeDasharray="4 4" />
-                    </motion.g>
+                    {/* Identifiers */}
+                    <text x="180" y="80" fill="white" className="text-xl font-bold tracking-tight font-handdrawn">&lt;Sidebar /&gt;</text>
+                    <path d="M285 75 Q300 75 300 65" stroke="white" strokeWidth="2" fill="none" strokeDasharray="4 4" />
 
-                    {/* <SidebarHeader /> (Blue) */}
-                    <motion.g
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="cursor-pointer group/header"
-                    >
+                    {/* Header (Dim on Hover) */}
+                    <motion.g animate={{ opacity: isHovered ? 0.1 : 1 }} transition={fadeTransition}>
                         <rect x="310" y="65" width="180" height="60" rx="12" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" strokeWidth="3" />
-                        <motion.text x="515" y="100" fill="#3B82F6" className="text-lg font-bold">&lt;SidebarHeader /&gt;</motion.text>
-                        <text x="515" y="120" fill="gray" className="text-sm">(Sticky)</text>
+                        <text x="515" y="100" fill="#3B82F6" className="text-lg font-bold font-handdrawn">&lt;SidebarHeader /&gt;</text>
                         <path d="M510 95 L495 95" stroke="#3B82F6" strokeWidth="2" fill="none" />
                     </motion.g>
 
-                    {/* <SidebarContent /> (Green) */}
-                    <motion.g
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
+                    {/* Content (Dim on Hover) */}
+                    <motion.g animate={{ opacity: isHovered ? 0.1 : 1 }} transition={fadeTransition}>
                         <rect x="310" y="135" width="180" height="230" rx="12" fill="rgba(34,197,94,0.1)" stroke="#22C55E" strokeWidth="3" />
-                        <text x="515" y="250" fill="#22C55E" className="text-lg font-bold">&lt;SidebarContent /&gt;</text>
-                        <text x="515" y="270" fill="gray" className="text-sm">(Scrollable)</text>
+                        <text x="515" y="250" fill="#22C55E" className="text-lg font-bold font-handdrawn">&lt;SidebarContent /&gt;</text>
                     </motion.g>
 
-                    {/* <SidebarGroup /> (Yellow) */}
-                    <motion.g
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.6 }}
-                        className="cursor-pointer group/group"
-                    >
-                        <rect x="325" y="150" width="150" height="90" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
-                        <rect x="325" y="250" width="150" height="100" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
-
-                        <text x="130" y="260" fill="#EAB308" className="text-lg font-bold">&lt;SidebarGroup /&gt;</text>
-                        <path d="M285 255 L320 255" stroke="#EAB308" strokeWidth="2" fill="none" />
-                    </motion.g>
-
-                    {/* <SidebarFooter /> (Red) */}
-                    <motion.g
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8 }}
-                    >
+                    {/* Footer (Dim on Hover) */}
+                    <motion.g animate={{ opacity: isHovered ? 0.1 : 1 }} transition={fadeTransition}>
                         <rect x="310" y="375" width="180" height="60" rx="12" fill="rgba(239,68,68,0.15)" stroke="#EF4444" strokeWidth="3" />
-                        <text x="515" y="410" fill="#EF4444" className="text-lg font-bold">&lt;SidebarFooter /&gt;</text>
-                        <text x="515" y="430" fill="gray" className="text-sm">(Sticky)</text>
+                        <text x="515" y="410" fill="#EF4444" className="text-lg font-bold font-handdrawn">&lt;SidebarFooter /&gt;</text>
                         <path d="M510 405 L495 405" stroke="#EF4444" strokeWidth="2" fill="none" />
                     </motion.g>
+
+
+                    {/* --- INTERACTIVE GROUP --- */}
+                    <motion.g
+                        className="cursor-pointer"
+                        onHoverStart={() => setIsHovered(true)}
+                        onHoverEnd={() => setIsHovered(false)}
+                    >
+                        {/* VIEW A: MACRO (Default) */}
+                        <motion.g
+                            animate={{ opacity: isHovered ? 0 : 1 }}
+                            transition={fadeTransition}
+                        >
+                            <rect x="325" y="150" width="150" height="90" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
+                            <rect x="325" y="250" width="150" height="100" rx="8" fill="rgba(234,179,8,0.1)" stroke="#EAB308" strokeWidth="2" strokeDasharray="6 4" />
+
+                            <text x="130" y="260" fill="#EAB308" className="text-lg font-bold font-handdrawn">&lt;SidebarGroup /&gt;</text>
+                            <path d="M285 255 L320 255" stroke="#EAB308" strokeWidth="2" fill="none" />
+                        </motion.g>
+
+                        {/* VIEW B: MICRO (Sketch Match) */}
+                        <motion.g
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: isHovered ? 1 : 0 }}
+                            transition={fadeTransition}
+                        >
+                            {/* Main Container / Expanded Group */}
+                            <rect x="260" y="120" width="280" height="260" rx="20" fill="#111" stroke="white" strokeWidth="2" />
+
+                            {/* Internal Items Stack */}
+                            <g transform="translate(280, 140)">
+                                {[0, 1, 2, 3].map((i) => (
+                                    <g key={i} transform={`translate(0, ${i * 55})`}>
+                                        {/* Blue Item Background */}
+                                        <rect width="240" height="40" rx="8" fill="rgba(59,130,246,0.1)" stroke="#3B82F6" strokeWidth="2" strokeDasharray="5 3" />
+
+                                        {/* Red Button Zone (Left) */}
+                                        <rect x="5" y="5" width="190" height="30" rx="4" fill="rgba(239,68,68,0.15)" stroke="#EF4444" strokeWidth="1" strokeDasharray="3 3" />
+
+                                        {/* Yellow Action Zone (Right) */}
+                                        <rect x="205" y="5" width="30" height="30" rx="4" fill="rgba(234,179,8,0.3)" stroke="#EAB308" strokeWidth="1" strokeDasharray="2 2" />
+                                    </g>
+                                ))}
+                            </g>
+
+                            {/* Annotations (Curved Arrows) */}
+                            {/* 1. <SidebarMenu /> - Pointing to Container Top-Left */}
+                            <g>
+                                <text x="120" y="100" fill="white" className="text-sm font-bold font-handdrawn">&lt;SidebarMenu /&gt;</text>
+                                <path d="M220 105 Q 250 110, 260 130" stroke="white" strokeWidth="2" fill="none" markerEnd="url(#arrowhead)" />
+                            </g>
+
+                            {/* 2. <SidebarMenuButton /> - Pointing to Red Zone (2nd Item) */}
+                            <g>
+                                <text x="80" y="220" fill="#EF4444" className="text-sm font-bold font-handdrawn">&lt;SidebarMenuButton /&gt;</text>
+                                <path d="M220 215 Q 250 215, 290 210" stroke="#EF4444" strokeWidth="2" fill="none" />
+                                <circle cx="290" cy="210" r="3" fill="#EF4444" />
+                            </g>
+
+                            {/* 3. <SidebarMenuItem /> - Pointing to Blue Item (1st Item) */}
+                            <g>
+                                <text x="560" y="180" fill="#3B82F6" className="text-sm font-bold font-handdrawn">&lt;SidebarMenuItem /&gt;</text>
+                                <path d="M550 180 Q 530 180, 520 160" stroke="#3B82F6" strokeWidth="2" fill="none" />
+                                <circle cx="520" cy="160" r="3" fill="#3B82F6" />
+                            </g>
+
+                            {/* 4. <SidebarMenuAction /> - Pointing to Yellow Zone (3rd Item) */}
+                            <g>
+                                <text x="560" y="300" fill="#EAB308" className="text-sm font-bold font-handdrawn">&lt;SidebarMenuAction /&gt;</text>
+                                <path d="M550 295 Q 520 290, 505 265" stroke="#EAB308" strokeWidth="2" fill="none" />
+                                <circle cx="505" cy="265" r="3" fill="#EAB308" />
+                            </g>
+
+                        </motion.g>
+                    </motion.g>
+
+                    {/* Arrow Marker Definition */}
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="white" />
+                        </marker>
+                    </defs>
+
                 </svg>
 
                 {/* Floating Aesthetic Labels */}
@@ -1264,9 +1329,16 @@ const ModularAnatomyDiagram = () => {
                     <div className="w-12 h-[1px] bg-mist/20" />
                     Architecture Blueprint v2.0
                 </div>
+
+                {/* Interaction Hint */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isHovered ? 0 : 0.6 }}
+                    className="absolute top-8 right-8 text-xs font-handdrawn text-mist bg-white/5 px-3 py-1 rounded-full border border-white/10"
+                >
+                    Hover to X-Ray
+                </motion.div>
             </div>
-
-
         </div>
     );
 };
@@ -1406,6 +1478,10 @@ const SectionRenderer = ({ section }) => {
         case 'prototype-player':
             return <PrototypePlayer images={section.images} title={section.title} description={section.description} />;
 
+
+        // --- NEW: Gif Showcase (Clean, no cursor) ---
+        case 'gif-showcase':
+            return <GifShowcase key={section.src} title={section.title} description={section.description} src={section.src} />;
 
         // --- NEW: Rule Builder Carousel ---
         case 'rule-builder-carousel':
