@@ -29,6 +29,29 @@ export const metadata = {
     icons: {
         icon: '/favicon.svg',
     },
+    openGraph: {
+        title: 'Rati Agarwal',
+        description:
+            'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
+        url: 'https://ratiagarwal.vercel.app',
+        siteName: 'Rati Agarwal',
+        images: [
+            {
+                url: '/logo.svg',
+                width: 1200,
+                height: 630,
+                alt: 'Rati Agarwal - Product Designer',
+            },
+        ],
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Rati Agarwal',
+        description:
+            'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
+        images: ['/logo.svg'],
+    },
 }
 
 export default function RootLayout({ children }) {
