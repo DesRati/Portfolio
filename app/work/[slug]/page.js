@@ -41,7 +41,7 @@ export default function ProjectPage() {
                     <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
                         <div className="absolute inset-0 bg-neon/20 blur-md rounded-full scale-0 group-hover:scale-150 transition-transform duration-300" />
                         <Image
-                            src="/logo.png"
+                            src="/logo.svg"
                             alt="Rati Agarwal"
                             fill
                             className="object-contain relative z-10"
