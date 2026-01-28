@@ -17,7 +17,7 @@ const projects = {
             subtitle: "Transforming Rigid Permission Systems",
             gradient: "linear-gradient(45deg, #FF3366, #FF9933)",
             links: [
-                { label: "Spotnana Platform", url: "https://www.spotnana.com" }
+                { label: "Spotnana Platform", url: "https://www.spotnana.com/corporations/" }
             ]
         },
         meta: [
@@ -183,7 +183,7 @@ const projects = {
             subtitle: "Scalable, Role-Aware Navigation",
             gradient: "linear-gradient(45deg, #00FFA3, #00D1FF)",
             links: [
-                { label: "Spotnana Platform", url: "https://www.spotnana.com" }
+                { label: "Spotnana Platform", url: "https://www.spotnana.com/corporations/" }
             ]
         },
         meta: [
@@ -1632,7 +1632,7 @@ export default function CaseStudy() {
                             <div className="flex flex-wrap items-center justify-between mb-4">
                                 <div className="flex items-center gap-6">
                                     <div className="font-mono text-neon tracking-widest uppercase text-sm">
-                                        01 / {project.hero.subtitle.split(' ')[0]}
+                                        0{Object.keys(projects).indexOf(slug) + 1} / {project.hero.subtitle.split(' ')[0]}
                                     </div>
                                     <div className="h-px w-20 bg-white/20" />
                                     {project.hero.links && project.hero.links.map((link, i) => (

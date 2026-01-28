@@ -103,28 +103,28 @@ const SelectedWork = () => {
         {
             title: "RBAC & ROLES",
             slug: "rbac-role-management",
-            description: "Deconstructing enterprise security into flexible building blocks.",
+            description: "Deconstructing rigid permissions into a flexible, scalable system for enterprise security.",
             tags: ["Security", "Enterprise", "Logic"],
             gradient: "linear-gradient(90deg, #FF3366, #FF9933)"
         },
         {
-            title: "SIDE NAV",
+            title: "NAVIGATION UX",
             slug: "navigation-restructure",
-            description: "Information architecture overhaul. Simplifying deep hierarchies.",
-            tags: ["IA", "System Design"],
+            description: "Context-aware information architecture. Elevating organization switching into a primary navigation layer.",
+            tags: ["IA", "System Design", "UX"],
             gradient: "linear-gradient(90deg, #00C6FF, #0072FF)"
         },
         {
-            title: "AI REPORTS",
+            title: "AI REPORTING",
             slug: "ai-assisted-reports",
-            description: "Conversational Analytics. From natural language to structured dashboards.",
+            description: "Conversational analytics. Translating natural language intent into instant, structured insights.",
             tags: ["AI", "Analytics", "UX"],
             gradient: "linear-gradient(90deg, #00F260, #0575E6)"
         },
         {
             title: "NATIVEBASE & GLUESTACK",
             slug: "nativebase-gluestack",
-            description: "The Evolution of UI. From Runtime Styling to High Performance Headless.",
+            description: "Universal UI ecosystem. Decoupling style from logic for high-performance, cross-platform component libraries.",
             tags: ["Open Source", "Design Systems"],
             gradient: "linear-gradient(90deg, #6B73FF, #000DFF)"
         }

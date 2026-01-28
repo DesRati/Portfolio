@@ -52,7 +52,7 @@ const Hero = () => {
                     RATI
                 </motion.h1>
                 <motion.h1
-                    className="font-display font-bold text-[15vw] leading-[0.8] tracking-tighter text-transparent text-stroke hover:text-neon hover:text-stroke-neon transition-colors duration-500 whitespace-nowrap cursor-none"
+                    className="font-display font-bold text-[15vw] leading-[0.8] tracking-tighter text-transparent text-stroke hover:text-neon/10 hover:[-webkit-text-stroke-color:var(--neon)] hover:glow-text transition-all duration-500 whitespace-nowrap cursor-none"
                     style={{ x: useSpring(mouseX, { stiffness: 50, damping: 20 }) }} // Slower layer
                 >
                     AGARWAL
