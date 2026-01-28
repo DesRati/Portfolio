@@ -79,13 +79,15 @@ const Journey = () => {
             <div className="container mx-auto px-8 max-w-7xl">
                 <motion.div
                     className="mb-20"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="font-display text-4xl text-ice mb-2">THE JOURNEY</h2>
-                    <h3 className="font-sans text-xl text-mist mb-4">From <span className="text-white">Commerce Grad</span> to <span className="text-neon">Systems Thinker</span></h3>
-                    <div className="h-1 w-20 bg-neon" />
+                    <h2 className="font-display text-4xl md:text-6xl text-ice mb-6 uppercase">
+                        THE <span className="text-neon">JOURNEY</span>
+                    </h2>
+                    <h3 className="font-sans text-xl text-mist mb-6 max-w-xl">From <span className="text-ice">Commerce Grad</span> to <span className="text-neon">Systems Thinker</span></h3>
+                    <div className="h-[2px] w-24 bg-gradient-to-r from-neon to-transparent opacity-50" />
                 </motion.div>
 
                 <div>

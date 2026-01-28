@@ -4,7 +4,8 @@ import Footer from './components/Footer';
 import Philosophy from './components/Philosophy';
 import Journey from './components/Journey';
 import SelectedWork from './components/SelectedWork';
-import SkillsAndBlog from './components/SkillsAndBlog';
+import Impact from './components/Impact';
+import Arsenal from './components/Arsenal';
 
 export default function Home() {
     return (
@@ -18,8 +19,9 @@ export default function Home() {
             </div>
 
             <Philosophy />
+            <Impact />
             <Journey />
-            <SkillsAndBlog />
+            <Arsenal />
 
             <Footer />
         </main>
