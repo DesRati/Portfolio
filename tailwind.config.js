@@ -52,5 +52,23 @@ module.exports = {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        function ({ addUtilities }) {
+            const newUtilities = {
+                '.text-stroke': {
+                    '-webkit-text-stroke': '1px rgba(255, 255, 255, 0.2)',
+                    'color': 'transparent',
+                },
+                '.text-stroke-neon': {
+                    '-webkit-text-stroke': '1px #00FF94',
+                    'color': 'transparent',
+                },
+                '.text-stroke-white': {
+                    '-webkit-text-stroke': '1px #FFFFFF',
+                    'color': 'transparent',
+                },
+            }
+            addUtilities(newUtilities, ['responsive', 'hover'])
+        }
+    ],
 }

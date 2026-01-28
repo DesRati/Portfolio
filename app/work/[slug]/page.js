@@ -179,7 +179,7 @@ const projects = {
     },
     'navigation-restructure': {
         hero: {
-            title: "SIDE NAVIGATION & IA",
+            title: "NAVIGATION UX",
             subtitle: "Scalable, Role-Aware Navigation",
             gradient: "linear-gradient(45deg, #00FFA3, #00D1FF)",
             links: [
@@ -187,7 +187,7 @@ const projects = {
             ]
         },
         meta: [
-            { label: "Role", value: "Lead Product Designer" },
+            { label: "Role", value: "Product Designer" },
             { label: "Focus", value: "IA / Component Design / RBAC" },
             { label: "Timeline", value: "3 Months" },
             { label: "Impact", value: "Platform-wide Standard" }
@@ -224,10 +224,10 @@ const projects = {
             {
                 type: 'text-row',
                 title: "RESEARCH FINDINGS",
-                header: "Competitive vs. User Reality",
-                body: "Our audit revealed that while competitors used complex multi-tier menus, our users prized speed and context clarity. The 'Switching' action was the highest-frequency task, yet it was buried in a profile dropdown."
+                header: "The Mental Model Mismatch",
+                body: "Legacy tools treat 'Organization' as a static setting—something you configure once. But for our power users, the Organization is their workspace. They don't just 'switch settings'; they 'jump contexts' hundreds of times a day. The architecture needed to elevate 'Org Switching' from an admin task to a primary navigation layer."
             },
-            { type: 'visual-handdrawn-table', hideColumnTitle: true },
+            { type: '', hideColumnTitle: true },
 
             // 4. DESIGN FRAMEWORK
             {
@@ -270,14 +270,17 @@ const projects = {
             },
             {
                 type: 'text-row',
+                title: "LEARNINGS",
                 header: "Target Outcomes",
-                body: "Currently in implementation. We are tracking success against two key KPIs: reducing time-to-task for lateral organization switching and eliminating support tickets related to 'lost' navigation states."
+                body: "Currently in implementation. We are tracking success against two key KPIs: reducing time-to-task for lateral organization switching and eliminating support tickets related to 'lost' navigation states.",
+                wrapperClass: "mb-8"
             },
 
             // 8. LEARNINGS
             {
                 type: 'reflection-grid',
-                title: "LEARNINGS",
+                // Title moved to previous section for alignment
+                wrapperClass: "mt-0",
                 rights: [
                     "Early integration with engineering ensured the IA hierarchy was technically feasible.",
                     "The restructuring and prototyping phase helped stakeholders focus on logic rather than polish.",
@@ -940,9 +943,6 @@ const GifShowcase = ({ title, description, src }) => {
     return (
         <div className="mb-32">
             <div className="mb-12">
-                {title && (
-                    <div className="font-mono text-xs text-neon uppercase tracking-widest mb-4">{title}</div>
-                )}
                 <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p>
             </div>
 
@@ -1116,39 +1116,6 @@ const RuleBuilderCarousel = ({ items }) => {
 // --- SECTIONS ---
 
 // --- NAVIGATION STUDY COMPONENTS ---
-
-const HanddrawnTable = () => {
-    const rows = [
-        { feature: "Single Source of Truth", compA: "Fragmented settings", compB: "Confusing menus", opp: "Unified Hub" },
-        { feature: "Role-Aware Visibility", compA: "No visibility levels", compB: "Flat permissions", opp: "Global Org Selector" },
-        { feature: "Modular Anatomy", compA: "Fixed layout", compB: "Inconsistent UI", opp: "Scalable System" }
-    ];
-
-    return (
-        <div className="font-handdrawn overflow-x-auto py-8">
-            <table className="min-w-full border-collapse">
-                <thead>
-                    <tr className="border-b-2 border-white/20">
-                        <th className="p-4 text-left text-neon text-xl">Key Feature</th>
-                        <th className="p-4 text-left text-mist/60 text-lg">Competitor A</th>
-                        <th className="p-4 text-left text-mist/60 text-lg">Competitor B</th>
-                        <th className="p-4 text-left text-neon text-xl font-bold italic">OUR OPPORTUNITY</th>
-                    </tr>
-                </thead>
-                <tbody className="text-mist">
-                    {rows.map((row, i) => (
-                        <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                            <td className="p-4 text-ice text-lg">{row.feature}</td>
-                            <td className="p-4 opacity-50">{row.compA}</td>
-                            <td className="p-4 opacity-50">{row.compB}</td>
-                            <td className="p-4 text-neon font-bold text-lg italic">{row.opp}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
-};
 
 const NavHierarchyDiagram = () => {
     return (
@@ -1613,7 +1580,8 @@ export default function CaseStudy() {
 
     if (!project) return <div className="min-h-screen bg-void flex items-center justify-center text-ice">Project Not Found</div>;
 
-    const { nextSlug: nextProjectSlug, nextProject } = getNextProject(slug);
+    const { nextSlug, nextProject } = getNextProject(slug);
+    const { prevSlug, prevProject } = getPreviousProject(slug);
 
     return (
         <main className="bg-void min-h-screen text-ice selection:bg-neon selection:text-void overflow-x-hidden" onMouseMove={handleMouseMove}>
@@ -1661,16 +1629,29 @@ export default function CaseStudy() {
                     <motion.div style={{ y: yHero, opacity: opacityHero }} className="container mx-auto">
                         <div className="flex flex-col gap-6">
                             {/* Tags/Links Row */}
-                            <div className="flex flex-wrap items-center gap-6 mb-4">
-                                <div className="font-mono text-neon tracking-widest uppercase text-sm">
-                                    01 / {project.hero.subtitle.split(' ')[0]}
+                            <div className="flex flex-wrap items-center justify-between mb-4">
+                                <div className="flex items-center gap-6">
+                                    <div className="font-mono text-neon tracking-widest uppercase text-sm">
+                                        01 / {project.hero.subtitle.split(' ')[0]}
+                                    </div>
+                                    <div className="h-px w-20 bg-white/20" />
+                                    {project.hero.links && project.hero.links.map((link, i) => (
+                                        <a key={i} href={link.url} target="_blank" className="font-mono text-xs text-mist hover:text-ice transition-colors uppercase border-b border-transparent hover:border-neon">
+                                            {link.label} ↗
+                                        </a>
+                                    ))}
                                 </div>
-                                <div className="h-px w-20 bg-white/20" />
-                                {project.hero.links && project.hero.links.map((link, i) => (
-                                    <a key={i} href={link.url} target="_blank" className="font-mono text-xs text-mist hover:text-ice transition-colors uppercase border-b border-transparent hover:border-neon">
-                                        {link.label} ↗
-                                    </a>
-                                ))}
+
+                                {/* Header Navigation */}
+                                <div className="flex items-center gap-4">
+                                    <Link href={`/work/${prevSlug}`} className="group flex items-center gap-2 font-mono text-xs text-mist hover:text-neon transition-colors">
+                                        <span className="group-hover:-translate-x-1 transition-transform">←</span> PREV
+                                    </Link>
+                                    <div className="w-px h-3 bg-white/20" />
+                                    <Link href={`/work/${nextSlug}`} className="group flex items-center gap-2 font-mono text-xs text-mist hover:text-neon transition-colors">
+                                        NEXT <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                    </Link>
+                                </div>
                             </div>
 
                             {/* Massive Title */}
@@ -1729,15 +1710,7 @@ export default function CaseStudy() {
                 </section>
 
                 {/* NEXT PROJECT FOOTER */}
-                <section className="py-40 border-t border-white/10 flex flex-col items-center justify-center text-center bg-void relative overflow-hidden group">
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 bg-gradient-to-t from-neon/20 to-transparent" />
-                    <div className="relative z-10">
-                        <div className="text-sm font-mono text-mist mb-8 uppercase tracking-widest">Next Case Study</div>
-                        <Link href={`/work/${nextProjectSlug}`} className="font-display text-6xl md:text-9xl text-ice hover:text-transparent hover:text-stroke-neon hover:text-stroke transition-all duration-500 leading-[0.8] tracking-tighter block">
-                            {nextProject.hero.title}
-                        </Link>
-                    </div>
-                </section>
+                <FooterNav nextProjectSlug={nextSlug} nextProject={nextProject} />
 
                 <Footer />
             </div>
@@ -1745,9 +1718,78 @@ export default function CaseStudy() {
     );
 }
 
+
 function getNextProject(currentSlug) {
     const slugs = Object.keys(projects);
     const nextIndex = (slugs.indexOf(currentSlug) + 1) % slugs.length;
     const nextSlug = slugs[nextIndex];
     return { nextSlug, nextProject: projects[nextSlug] };
 }
+
+function getPreviousProject(currentSlug) {
+    const slugs = Object.keys(projects);
+    const prevIndex = (slugs.indexOf(currentSlug) - 1 + slugs.length) % slugs.length;
+    const prevSlug = slugs[prevIndex];
+    return { prevSlug, prevProject: projects[prevSlug] };
+}
+
+const FooterNav = ({ nextProjectSlug, nextProject }) => {
+    const [isHovering, setIsHovering] = useState(false);
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end end"]
+    });
+
+    const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+
+    // Local Mouse for Magnetic Effect
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+    };
+
+    return (
+        <section
+            ref={containerRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            className="py-40 border-t border-white/10 flex flex-col items-center justify-center text-center bg-void relative overflow-hidden group min-h-[80vh] cursor-none"
+        >
+
+            {/* Local Magnetic Cursor */}
+            <motion.div
+                className="absolute w-24 h-24 border border-white/20 rounded-full pointer-events-none z-20 flex items-center justify-center backdrop-blur-sm"
+                style={{
+                    x: mouseX,
+                    y: mouseY,
+                    translateX: "-50%",
+                    translateY: "-50%",
+                    scale: isHovering ? 1 : 0,
+                    opacity: isHovering ? 1 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 150, damping: 15 }}
+            >
+                <div className="w-2 h-2 bg-neon rounded-full shadow-[0_0_10px_#00FF94]" />
+            </motion.div>
+
+            <motion.div style={{ scale, opacity }} className="relative z-10 p-12">
+                <div className="text-sm font-mono text-mist mb-8 uppercase tracking-widest">Next Case Study</div>
+
+                <Link href={`/work/${nextProjectSlug}`} className="block relative group-nav outline-none">
+                    <span className="font-display text-6xl md:text-9xl text-ice transition-colors duration-500 leading-[0.8] tracking-tighter block
+                        group-hover:text-neon
+                    ">
+                        {nextProject.hero.title}
+                    </span>
+                </Link>
+            </motion.div>
+        </section>
+    );
+};
