@@ -123,12 +123,21 @@ const Arsenal = () => {
                     </motion.p>
                 </div>
 
-                <div className="flex flex-col gap-2 -ml-20">
-                    <div className="overflow-visible">
+                <div className="relative mt-20 max-w-6xl -ml-2">
+                    <div className="relative overflow-hidden bg-white/[0.01] border border-white/10 rounded-[2.5rem] py-8">
+                        {/* Left gradient */}
+                        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 
+        bg-gradient-to-r from-black to-transparent z-10" />
+
+                        {/* Right gradient */}
+                        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 
+        bg-gradient-to-l from-black to-transparent z-10" />
+
                         <MarqueeRow items={row1} duration={45} />
                         <MarqueeRow items={row2} reverse duration={55} />
                         <MarqueeRow items={row3} duration={50} />
                     </div>
+
                 </div>
 
                 <div className="mt-24 flex justify-start">

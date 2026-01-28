@@ -32,7 +32,7 @@ export const FramedMedia = ({ src, caption }) => {
 export const StaticEmbed = ({ src, title, caption }) => {
     return (
         <div className="mb-32 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
-            <div className="relative w-full h-[708px] overflow-hidden">
+            <div className="relative w-full h-[508px] overflow-hidden">
                 <iframe
                     src={src}
                     title={title}
@@ -130,10 +130,10 @@ export const PrototypePlayer = ({ images, description }) => {
         const sequence = () => {
             setActiveIndex(0);
             setCursorVariant("initial");
-            t1 = setTimeout(() => setCursorVariant("target"), 1000);
-            t2 = setTimeout(() => setCursorVariant("click"), 2000);
-            t3 = setTimeout(() => { setCursorVariant("modal"); setActiveIndex(1); }, 2300);
-            t4 = setTimeout(sequence, 6000);
+            t1 = setTimeout(() => setCursorVariant("target"), 500);
+            t2 = setTimeout(() => setCursorVariant("click"), 1000);
+            t3 = setTimeout(() => { setCursorVariant("modal"); setActiveIndex(1); }, 1300);
+            t4 = setTimeout(sequence, 3000);
         };
         sequence();
         return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };

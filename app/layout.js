@@ -23,9 +23,12 @@ const handdrawn = Architects_Daughter({
 })
 
 export const metadata = {
-    title: 'RATI AGARWAL [2026] | PRODUCT DESIGN',
+    title: 'Rati Agarwal',
     description: 'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
     themeColor: '#000000',
+    icons: {
+        icon: '/favicon.svg',
+    },
 }
 
 export default function RootLayout({ children }) {
