@@ -14,7 +14,7 @@ export default function ProjectPage() {
     const { slug } = useParams();
     const project = projects[slug];
 
-    if (!project) {
+    if (!project || (project.hero && project.hero.comingSoon)) {
         notFound();
     }
 
@@ -58,16 +58,18 @@ export default function ProjectPage() {
             <div ref={containerRef} className="relative z-10">
 
                 {/* HERO SECTION */}
-                <section className="relative min-h-[90vh] flex flex-col justify-end pb-32 px-8 pt-40">
+                <section className="relative min-h-[70vh] md:min-h-[90vh] flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-8 pt-40 md:pt-40">
                     <motion.div style={{ y: yHero, opacity: opacityHero }} className="container mx-auto">
                         <div className="flex flex-col gap-6">
                             {/* Tags/Links Row */}
                             <div className="flex flex-wrap items-center justify-between mb-4">
                                 <div className="flex items-center gap-6">
                                     <div className="font-mono text-neon tracking-widest uppercase text-sm">
-                                        0{Object.keys(projects).indexOf(slug) + 1} / {project.hero.subtitle.split(' ')[0]}
+                                        PROJECT 0{Object.keys(projects).indexOf(slug) + 1}
                                     </div>
-                                    <div className="h-px w-20 bg-white/20" />
+                                    {project.hero.links && project.hero.links.length > 0 && (
+                                        <div className="w-1 h-1 bg-neon rounded-full" />
+                                    )}
                                     {project.hero.links && project.hero.links.map((link, i) => (
                                         <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-mist hover:text-ice transition-colors uppercase border-b border-transparent hover:border-neon">
                                             {link.label} ↗
@@ -81,14 +83,20 @@ export default function ProjectPage() {
                                         <span className="group-hover:-translate-x-1 transition-transform">←</span> PREV
                                     </Link>
                                     <div className="w-px h-3 bg-white/20" />
-                                    <Link href={`/work/${nextSlug}`} className="group flex items-center gap-2 font-mono text-xs text-mist hover:text-neon transition-colors">
-                                        NEXT <span className="group-hover:translate-x-1 transition-transform">→</span>
-                                    </Link>
+                                    {nextProject?.hero?.comingSoon ? (
+                                        <span className="flex items-center gap-2 font-mono text-xs text-mist/30 cursor-not-allowed">
+                                            NEXT <span className="opacity-30">→</span>
+                                        </span>
+                                    ) : (
+                                        <Link href={`/work/${nextSlug}`} className="group flex items-center gap-2 font-mono text-xs text-mist hover:text-neon transition-colors">
+                                            NEXT <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
 
                             {/* Massive Title */}
-                            <h1 className="font-display font-bold text-[10vw] leading-[0.85] tracking-tighter text-ice mix-blend-overlay">
+                            <h1 className="font-display font-bold text-[15vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ice mix-blend-overlay break-words">
                                 {project.hero.title}
                             </h1>
 
@@ -105,7 +113,7 @@ export default function ProjectPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-12">
 
                             {/* Sticky Sidebar (Meta) */}
-                            <div className="lg:col-span-3 border-r border-white/10 p-8 lg:p-12 lg:min-h-screen">
+                            <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/10 p-8 lg:p-12 lg:min-h-screen">
                                 <div className="lg:sticky lg:top-32 flex flex-col gap-12">
                                     {project.meta.map((item) => (
                                         <div key={item.label}>
@@ -124,7 +132,7 @@ export default function ProjectPage() {
                                         {!section.hideColumnTitle && (
                                             <div className="md:col-span-3">
                                                 {section.title && (
-                                                    <span className="font-mono text-xs text-neon uppercase tracking-widest sticky top-32">
+                                                    <span className="font-mono text-xs text-neon uppercase tracking-widest sticky top-32 block mb-4 md:mb-0">
                                                         {section.title}
                                                     </span>
                                                 )}

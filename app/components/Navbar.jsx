@@ -23,7 +23,9 @@ const Navbar = () => {
 
     return (
         <motion.header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 glass-card border-t-0 border-x-0 rounded-none' : 'py-6 bg-transparent border-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+                ? 'py-4 bg-gradient-to-b from-void via-void/70 to-transparent backdrop-blur-[2px]'
+                : 'py-6 bg-transparent border-transparent'
                 }`}
             initial={{ y: -100 }}
             animate={{ y: 0 }}

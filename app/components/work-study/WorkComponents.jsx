@@ -6,33 +6,73 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 
 export const FramedMedia = ({ src, caption }) => {
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
-        <div className="mb-32">
-            <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl relative group">
-                <div className="relative bg-void flex items-center justify-center overflow-hidden">
-                    <img
+        <>
+            {mounted && isFullScreen && createPortal(
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsFullScreen(false)} className="fixed inset-0 z-[9999] bg-[#050505]/95 backdrop-blur-md flex items-center justify-center force-cursor-auto p-8">
+                    {/* Close Button */}
+                    <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors flex items-center gap-3 group force-cursor-pointer">
+                        <span className="text-xs font-mono tracking-widest group-hover:text-neon">CLOSE</span>
+                        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:border-neon group-hover:bg-neon/10">✕</div>
+                    </button>
+                    <motion.img
                         src={src}
-                        alt={caption || "Interface Demo"}
-                        className="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-700 will-change-transform"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
-                </div>
-            </div>
-            {caption && (
-                <div className="mt-6 flex items-center justify-center gap-3">
-                    <div className="w-8 h-px bg-white/10" />
-                    <p className="text-xs font-mono text-mist uppercase tracking-widest">{caption}</p>
-                    <div className="w-8 h-px bg-white/10" />
-                </div>
+                    {caption && (
+                        <div className="absolute bottom-8 left-0 right-0 text-center">
+                            <p className="text-sm font-mono text-white/70 bg-black/50 inline-block px-4 py-2 rounded-full backdrop-blur-sm border border-white/10">{caption}</p>
+                        </div>
+                    )}
+                </motion.div>,
+                document.body
             )}
-        </div>
+            <div className="mb-32">
+                <div
+                    onClick={() => setIsFullScreen(true)}
+                    className="rounded-2xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl relative group cursor-zoom-in"
+                >
+                    <div className="relative bg-void flex items-center justify-center overflow-hidden">
+                        <img
+                            src={src}
+                            alt={caption || "Interface Demo"}
+                            className="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-700 will-change-transform"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+
+                        {/* Hover Overlay Hint */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                            <div className="bg-black/50 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-xs font-mono text-white flex items-center gap-2">
+                                <span className="text-neon">⤢</span> EXPAND
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {caption && (
+                    <div className="mt-6 flex items-center justify-center gap-3">
+                        <div className="w-8 h-px bg-white/10" />
+                        <p className="text-xs font-mono text-mist uppercase tracking-widest">{caption}</p>
+                        <div className="w-8 h-px bg-white/10" />
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
 export const StaticEmbed = ({ src, title, caption }) => {
     return (
         <div className="mb-32 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#111]">
-            <div className="relative w-full h-[508px] overflow-hidden">
+            <div className="relative w-full h-[300px] md:h-[508px] overflow-hidden">
                 <iframe
                     src={src}
                     title={title}
@@ -79,7 +119,7 @@ export const ResizableEmbed = ({ src, title, caption }) => {
                     <div className="text-[10px] font-mono text-white/30 tracking-widest uppercase">{title}</div>
                     <div className="w-8" />
                 </div>
-                <div className="relative w-full h-[708px] overflow-hidden bg-charcoal">
+                <div className="relative w-full h-[400px] md:h-[708px] overflow-hidden bg-charcoal">
                     <iframe
                         src={src}
                         title={title}
@@ -93,10 +133,10 @@ export const ResizableEmbed = ({ src, title, caption }) => {
                             border: 'none',
                         }}
                     />
-                    {isResizing && <div className="absolute inset-0 z-50 bg-transparent cursor-ew-resize" />}
+                    {isResizing && <div className="absolute inset-0 z-50 bg-transparent cursor-ew-resize hidden md:block" />}
                 </div>
                 <motion.div
-                    className="absolute top-0 right-0 w-6 h-full cursor-ew-resize z-50 flex items-center justify-center group touch-none"
+                    className="absolute top-0 right-0 w-6 h-full cursor-ew-resize z-50 hidden md:flex items-center justify-center group touch-none"
                     onPan={(event, info) => {
                         if (!containerRef.current) return;
                         const sensitivity = 2;
@@ -163,14 +203,51 @@ export const PrototypePlayer = ({ images, description }) => {
     );
 };
 
-export const GifShowcase = ({ description, src }) => (
-    <div className="mb-32">
-        <div className="mb-12"><p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p></div>
-        <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full">
-            <img src={src} alt="" className="w-full h-auto block" />
-        </div>
-    </div>
-);
+export const GifShowcase = ({ description, src }) => {
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    return (
+        <>
+            {mounted && isFullScreen && createPortal(
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsFullScreen(false)} className="fixed inset-0 z-[9999] bg-[#050505]/95 backdrop-blur-md flex items-center justify-center force-cursor-auto p-8">
+                    {/* Close Button */}
+                    <button className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors flex items-center gap-3 group force-cursor-pointer">
+                        <span className="text-xs font-mono tracking-widest group-hover:text-neon">CLOSE</span>
+                        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:border-neon group-hover:bg-neon/10">✕</div>
+                    </button>
+                    <motion.img
+                        src={src}
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
+                    />
+                </motion.div>,
+                document.body
+            )}
+            <div className="mb-32">
+                <div className="mb-12"><p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p></div>
+                <div
+                    onClick={() => setIsFullScreen(true)}
+                    className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full group cursor-zoom-in"
+                >
+                    <img src={src} alt="" className="w-full h-auto block" />
+
+                    {/* Hover Overlay Hint */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+                        <div className="bg-black/50 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-xs font-mono text-white flex items-center gap-2">
+                            <span className="text-neon">⤢</span> EXPAND
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
 
 export const RuleBuilderCarousel = ({ items }) => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -189,9 +266,9 @@ export const RuleBuilderCarousel = ({ items }) => {
     return (
         <>
             {mounted && isFullScreen && createPortal(
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col">
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[9999] bg-[#050505] flex flex-col force-cursor-auto">
                     <div className="absolute top-0 right-0 p-6 z-50">
-                        <button onClick={() => setIsFullScreen(false)} className="p-3 rounded-full bg-white/10 text-white border border-white/10">✕</button>
+                        <button onClick={() => setIsFullScreen(false)} className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 text-white border border-white/10 force-cursor-pointer hover:bg-white/20 transition-colors">✕</button>
                     </div>
                     <div className="flex-1 flex items-center justify-center p-12 overflow-hidden">
                         <motion.img key={activeItem.image} src={activeItem.image} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="max-w-full max-h-full object-contain" />
@@ -203,8 +280,8 @@ export const RuleBuilderCarousel = ({ items }) => {
                                 <p className="text-mist text-lg">{activeItem.description}</p>
                             </div>
                             <div className="flex gap-4">
-                                <button onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)} className="p-4 rounded-full border border-white/10 hover:bg-white/10">←</button>
-                                <button onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)} className="p-4 rounded-full border border-white/10 hover:bg-white/10">→</button>
+                                <button onClick={() => setActiveIndex((prev) => (prev - 1 + items.length) % items.length)} className="p-4 rounded-full border border-white/10 hover:bg-white/10 force-cursor-pointer">←</button>
+                                <button onClick={() => setActiveIndex((prev) => (prev + 1) % items.length)} className="p-4 rounded-full border border-white/10 hover:bg-white/10 force-cursor-pointer">→</button>
                             </div>
                         </div>
                     </div>
@@ -216,7 +293,7 @@ export const RuleBuilderCarousel = ({ items }) => {
                     <div className="absolute inset-0 flex items-center justify-center z-10 opacity-60 group-hover:opacity-100">
                         <div className="flex flex-col items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-neon group-hover:text-black">↗</div>
-                            <span className="font-mono text-xs text-mist uppercase tracking-widest group-hover:text-neon">View Scenarios</span>
+                            <span className="font-mono text-xs text-mist uppercase tracking-widest group-hover:text-neon">View Rule Builder</span>
                         </div>
                     </div>
                     <div className="absolute inset-0 opacity-20 blur-sm scale-110 pointer-events-none grayscale group-hover:grayscale-0">
@@ -249,10 +326,21 @@ export const FooterNav = ({ nextProjectSlug, nextProject }) => {
                 <div className="w-2 h-2 bg-neon rounded-full" />
             </motion.div>
             <motion.div style={{ scale, opacity }} className="relative z-10 p-12">
-                <div className="text-sm font-mono text-mist mb-8 uppercase tracking-widest">Next Case Study</div>
-                <Link href={`/work/${nextProjectSlug}`} className="block relative group-nav outline-none">
-                    <span className="font-display text-6xl md:text-9xl text-ice transition-colors duration-500 leading-[0.8] tracking-tighter block group-hover:text-neon">{nextProject.hero.title}</span>
-                </Link>
+                <div className="text-sm font-mono text-mist mb-8 uppercase tracking-widest flex items-center justify-center gap-3">
+                    Next Case Study
+                    {nextProject.hero.comingSoon && (
+                        <span className="bg-neon text-void px-2 py-0.5 rounded text-[10px] font-bold tracking-wider">COMING SOON</span>
+                    )}
+                </div>
+                {nextProject.hero.comingSoon ? (
+                    <div className="block relative outline-none cursor-not-allowed opacity-50">
+                        <span className="font-display text-6xl md:text-9xl text-ice leading-[0.8] tracking-tighter block">{nextProject.hero.title}</span>
+                    </div>
+                ) : (
+                    <Link href={`/work/${nextProjectSlug}`} className="block relative group-nav outline-none">
+                        <span className="font-display text-6xl md:text-9xl text-ice transition-colors duration-500 leading-[0.8] tracking-tighter block group-hover:text-neon">{nextProject.hero.title}</span>
+                    </Link>
+                )}
             </motion.div>
         </section>
     );

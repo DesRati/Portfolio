@@ -98,11 +98,11 @@ const Arsenal = () => {
     ];
 
     return (
-        <section id="arsenal" className="py-40 bg-void relative overflow-hidden">
+        <section id="arsenal" className="py-20 md:py-32 bg-void relative overflow-hidden">
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-void via-void/80 to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-void via-void/80 to-transparent z-10 pointer-events-none" />
 
-            <div className="pl-8 md:pl-20 relative z-20">
+            <div className="container mx-auto px-8 max-w-7xl relative z-20">
                 <div className="text-left mb-20">
                     <motion.h2
                         className="font-display text-4xl md:text-6xl text-ice mb-6 tracking-tight uppercase"
@@ -140,9 +140,7 @@ const Arsenal = () => {
 
                 </div>
 
-                <div className="mt-24 flex justify-start">
-                    <div className="h-[2px] w-24 bg-gradient-to-r from-neon to-transparent opacity-50" />
-                </div>
+
             </div>
         </section>
     );

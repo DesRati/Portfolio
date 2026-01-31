@@ -1,7 +1,7 @@
 export const projects = {
-    'rbac-role-management': {
+    'role-basedaccesscontrolrbac': {
         hero: {
-            title: "RBAC & ROLE MANAGEMENT",
+            title: "Role-Based Access Control (RBAC)",
             subtitle: "Transforming Rigid Permission Systems",
             gradient: "linear-gradient(45deg, #FF3366, #FF9933)",
             links: [
@@ -245,79 +245,10 @@ export const projects = {
             }
         ]
     },
-    'ai-assisted-reports': {
+    'semantic-system-design': {
         hero: {
-            title: "AI REPORTING",
-            subtitle: "From Blank Canvas to Instant Insights",
-            gradient: "linear-gradient(45deg, #00F260, #0575E6)",
-            links: [
-                { label: "Product Feature", url: "https://spotnana.com/analytics" }
-            ]
-        },
-        meta: [
-            { label: "Role", value: "Lead Designer" },
-            { label: "Team", value: "AI Lab (3 Eng, 1 PM)" },
-            { label: "Timeline", value: "8 Weeks (MVP)" },
-            { label: "Tech", value: "OpenAI + Internal Data" }
-        ],
-        sections: [
-            {
-                type: 'text-row',
-                title: "THE LANDSCAPE",
-                header: "The 'Blank Page' Problem",
-                body: "Travel Managers have tons of data but zero time. Our old Analytics product was a powerful blank canvas—users had to manually drag-and-drop columns to build charts. Most gave up. We needed to lower the barrier to entry."
-            },
-            {
-                type: 'quote',
-                text: "I know the answer is in there, but I don't know how to build a pivot table. I just want to ask 'Why is our spend up?'",
-                author: "C-Level Executive"
-            },
-            {
-                type: 'grid-problem-solution',
-                problem: "The Disconnect: Users think in questions ('Is New York expensive?'), but tools demand structure ('Group by City, Sum by Amount'). There was a translation gap.",
-                solution: "The Solution: A Conversational Interface. We use LLMs to translate natural language intent into structured SQL queries, auto-generating the perfect chart."
-            },
-            {
-                type: 'text-row',
-                title: "STRATEGY",
-                header: "Confidence as a UX Metric",
-                body: "Our biggest risk wasn't technical; it was trust. If the AI hallucinated once, users would leave. We decided to prioritize 'Confidence' over 'Coverage'. If the definition was ambiguous, the AI would ask clarifying questions rather than guessing."
-            },
-            {
-                type: 'process-timeline',
-                title: "DESIGNING INTELLIGENCE",
-                steps: [
-                    { title: "Intent Mapping", description: "I mapped 500+ common user questions to visualize what charts they actually needed. Found 9 core 'Intent Types' (Comparison, Trend, Distribution)." },
-                    { title: "The 'Confidence' UI", description: "Designed specific UI patterns for when the AI is 100% sure vs when it's guessing. Trust is fragile; we added 'Reasoning Citations' to every answer." },
-                    { title: "Adaptive Visualization", description: "Created a rendering engine that picks the right viz (Bar vs Line) based on data shape. (e.g., Dates = Line Chart)." },
-                    { title: "Feedback Loop", description: "Every answer has a 'Thumb Up/Down' to train the model on specific travel terminology." }
-                ]
-            },
-            { type: 'image-grid', title: "PROTOTYPES", items: [{ caption: "Natural Language Input" }, { caption: "Adaptive Charts Logic" }, { caption: "Error Handling (Hallucinations)" }] },
-            {
-                type: 'reflection-grid',
-                rights: [
-                    "Guardrails: Restricting the AI to *only* answer from the database prevented 99% of hallucinations.",
-                    "Empty States: We added 'Suggested Questions' to the empty state, which increased first-time engagement by 300%."
-                ],
-                wrongs: [
-                    "Speed Perception: The LLM took 10s to load. We added a 'Thinking...' skeleton loader that showed *what* it was verifying to make the wait feel valuable."
-                ]
-            },
-            {
-                type: 'stat-row',
-                stats: [
-                    { value: "8s", label: "Time to Insight" },
-                    { value: "92%", label: "Query Success Rate" },
-                    { value: "3k+", label: "Reports Generated" }
-                ]
-            }
-        ]
-    },
-    'nativebase-gluestack': {
-        hero: {
-            title: "NATIVEBASE & GLUESTACK",
-            subtitle: "Universal Component Libraries for Web & Mobile",
+            title: "SEMANTIC SYSTEM DESIGN",
+            subtitle: "Architecting a Headless, Cross-Platform Ecosystem",
             gradient: "linear-gradient(135deg, #6B73FF, #000DFF)",
             links: [
                 { label: "Gluestack.io", url: "https://gluestack.io" },
@@ -418,6 +349,76 @@ export const projects = {
                     { value: "87K+", label: "Weekly Downloads" },
                     { value: "40%", label: "Faster Handoff" },
                     { value: "100%", label: "WCAG 3.0 Score" }
+                ]
+            }
+        ]
+    },
+    'ai-assisted-reports': {
+        hero: {
+            title: "AI REPORTING",
+            subtitle: "From Blank Canvas to Instant Insights",
+            comingSoon: true,
+            gradient: "linear-gradient(45deg, #00F260, #0575E6)",
+            links: [
+                { label: "Product Feature", url: "https://spotnana.com/analytics" }
+            ]
+        },
+        meta: [
+            { label: "Role", value: "Lead Designer" },
+            { label: "Team", value: "AI Lab (3 Eng, 1 PM)" },
+            { label: "Timeline", value: "8 Weeks (MVP)" },
+            { label: "Tech", value: "OpenAI + Internal Data" }
+        ],
+        sections: [
+            {
+                type: 'text-row',
+                title: "THE LANDSCAPE",
+                header: "The 'Blank Page' Problem",
+                body: "Travel Managers have tons of data but zero time. Our old Analytics product was a powerful blank canvas—users had to manually drag-and-drop columns to build charts. Most gave up. We needed to lower the barrier to entry."
+            },
+            {
+                type: 'quote',
+                text: "I know the answer is in there, but I don't know how to build a pivot table. I just want to ask 'Why is our spend up?'",
+                author: "C-Level Executive"
+            },
+            {
+                type: 'grid-problem-solution',
+                problem: "The Disconnect: Users think in questions ('Is New York expensive?'), but tools demand structure ('Group by City, Sum by Amount'). There was a translation gap.",
+                solution: "The Solution: A Conversational Interface. We use LLMs to translate natural language intent into structured SQL queries, auto-generating the perfect chart."
+            },
+            {
+                type: 'text-row',
+                title: "STRATEGY",
+                header: "Confidence as a UX Metric",
+                body: "Our biggest risk wasn't technical; it was trust. If the AI hallucinated once, users would leave. We decided to prioritize 'Confidence' over 'Coverage'. If the definition was ambiguous, the AI would ask clarifying questions rather than guessing."
+            },
+            {
+                type: 'process-timeline',
+                title: "DESIGNING INTELLIGENCE",
+                steps: [
+                    { title: "Intent Mapping", description: "I mapped 500+ common user questions to visualize what charts they actually needed. Found 9 core 'Intent Types' (Comparison, Trend, Distribution)." },
+                    { title: "The 'Confidence' UI", description: "Designed specific UI patterns for when the AI is 100% sure vs when it's guessing. Trust is fragile; we added 'Reasoning Citations' to every answer." },
+                    { title: "Adaptive Visualization", description: "Created a rendering engine that picks the right viz (Bar vs Line) based on data shape. (e.g., Dates = Line Chart)." },
+                    { title: "Feedback Loop", description: "Every answer has a 'Thumb Up/Down' to train the model on specific travel terminology." }
+                ]
+            },
+            { type: 'image-grid', title: "PROTOTYPES", items: [{ caption: "Natural Language Input" }, { caption: "Adaptive Charts Logic" }, { caption: "Error Handling (Hallucinations)" }] },
+            {
+                type: 'reflection-grid',
+                rights: [
+                    "Guardrails: Restricting the AI to *only* answer from the database prevented 99% of hallucinations.",
+                    "Empty States: We added 'Suggested Questions' to the empty state, which increased first-time engagement by 300%."
+                ],
+                wrongs: [
+                    "Speed Perception: The LLM took 10s to load. We added a 'Thinking...' skeleton loader that showed *what* it was verifying to make the wait feel valuable."
+                ]
+            },
+            {
+                type: 'stat-row',
+                stats: [
+                    { value: "8s", label: "Time to Insight" },
+                    { value: "92%", label: "Query Success Rate" },
+                    { value: "3k+", label: "Reports Generated" }
                 ]
             }
         ]

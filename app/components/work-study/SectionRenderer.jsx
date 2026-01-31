@@ -21,8 +21,8 @@ export const SectionRenderer = ({ section }) => {
         case 'text-row':
             return (
                 <div className={section.className || "mb-12"}>
-                    <h2 className="font-display text-4xl md:text-5xl text-ice mb-6 leading-tight">{section.header}</h2>
-                    <p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{section.body}</p>
+                    <h2 className="font-display text-3xl md:text-5xl text-ice mb-6 leading-tight">{section.header}</h2>
+                    <p className="font-sans text-lg md:text-xl text-mist leading-relaxed font-light max-w-2xl">{section.body}</p>
                 </div>
             );
         case 'grid-problem-solution':
@@ -57,8 +57,8 @@ export const SectionRenderer = ({ section }) => {
             );
         case 'full-text':
             return (
-                <div className="mb-32 border-l-2 border-neon pl-8 py-2">
-                    <h3 className="font-display text-2xl text-ice mb-4">{section.header}</h3>
+                <div className="mb-32 border-l-2 border-neon pl-6 md:pl-8 py-2">
+                    <h3 className="font-display text-2xl md:text-3xl text-ice mb-4">{section.header}</h3>
                     <p className="font-sans text-lg text-mist leading-relaxed max-w-3xl">{section.body}</p>
                 </div>
             );

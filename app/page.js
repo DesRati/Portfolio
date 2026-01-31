@@ -6,6 +6,7 @@ import Journey from './components/Journey';
 import SelectedWork from './components/SelectedWork';
 import Impact from './components/Impact';
 import Arsenal from './components/Arsenal';
+import Writing from './components/Writing';
 
 export default function Home() {
     return (
@@ -22,6 +23,7 @@ export default function Home() {
             <Impact />
             <Journey />
             <Arsenal />
+            <Writing />
 
             <Footer />
         </main>

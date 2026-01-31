@@ -46,13 +46,13 @@ const Hero = () => {
                 style={{ y: y1, opacity }}
             >
                 <motion.h1
-                    className="font-display font-bold text-[15vw] leading-[0.8] tracking-tighter text-ice whitespace-nowrap"
+                    className="font-display font-bold text-[22vw] md:text-[15vw] leading-[0.8] tracking-tighter text-ice whitespace-nowrap"
                     style={{ x: springX }}
                 >
                     RATI
                 </motion.h1>
                 <motion.h1
-                    className="font-display font-bold text-[15vw] leading-[0.8] tracking-tighter text-transparent text-stroke hover:text-neon/10 hover:[-webkit-text-stroke-color:var(--neon)] hover:glow-text transition-all duration-500 whitespace-nowrap cursor-none"
+                    className="font-display font-bold text-[22vw] md:text-[15vw] leading-[0.8] tracking-tighter text-transparent text-stroke hover:text-neon hover:[-webkit-text-stroke-color:var(--neon)] hover:glow-text transition-all duration-500 whitespace-nowrap cursor-none"
                     style={{ x: useSpring(mouseX, { stiffness: 50, damping: 20 }) }} // Slower layer
                 >
                     AGARWAL
@@ -61,12 +61,12 @@ const Hero = () => {
 
             {/* SUBTEXT LAYER */}
             <motion.div
-                className="absolute bottom-20 left-10 md:left-20 z-20"
+                className="absolute bottom-20 left-6 md:bottom-20 md:left-20 z-20"
                 style={{ y: y2 }}
             >
                 <div className="flex flex-col gap-2">
                     <span className="font-sans text-brand-neon text-sm tracking-[0.2em] uppercase text-neon">
-                        [ 2026 Archive ]
+                        [ 2026 ]
                     </span>
                     <p className="font-display text-4xl md:text-6xl text-ice max-w-2xl leading-none">
                         SIMPLIFYING <br />
@@ -83,7 +83,7 @@ const Hero = () => {
                 transition={{ delay: 1 }}
             >
                 <div className="w-[1px] h-20 bg-neon animate-pulse" />
-                <span className="font-mono text-xs text-neon vert-rl writing-mode-vertical-rl transform rotate-180">
+                <span className="font-mono text-xs text-neon vert-rl writing-mode-vertical-rl">
                     SCROLL TO EXPLORE
                 </span>
             </motion.div>
