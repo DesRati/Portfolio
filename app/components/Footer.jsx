@@ -28,6 +28,8 @@ const Footer = () => {
                             <a
                                 key={link.name}
                                 href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="font-mono text-sm text-mist hover:text-neon transition-colors tracking-widest"
                             >
                                 {link.name}

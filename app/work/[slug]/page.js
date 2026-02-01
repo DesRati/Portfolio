@@ -96,7 +96,7 @@ export default function ProjectPage() {
                             </div>
 
                             {/* Massive Title */}
-                            <h1 className="font-display font-bold text-[18vw] md:text-[10vw] leading-[0.8] tracking-tighter text-ice mix-blend-overlay break-words mt-4 md:mt-0">
+                            <h1 className="font-display font-bold text-[18vw] md:text-[10vw] leading-none tracking-tighter text-ice mix-blend-overlay break-words mt-4 md:mt-0">
                                 {project.hero.title}
                             </h1>
 

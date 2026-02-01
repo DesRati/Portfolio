@@ -13,6 +13,16 @@ export const FramedMedia = ({ src, caption }) => {
         setMounted(true);
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') setIsFullScreen(false);
+        };
+        if (isFullScreen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isFullScreen]);
+
     return (
         <>
             {mounted && isFullScreen && createPortal(
@@ -39,6 +49,9 @@ export const FramedMedia = ({ src, caption }) => {
             <div className="mb-32">
                 <div
                     onClick={() => setIsFullScreen(true)}
+                    onKeyDown={(e) => e.key === 'Enter' && setIsFullScreen(true)}
+                    role="button"
+                    tabIndex={0}
                     className="rounded-2xl overflow-hidden border border-white/10 bg-[#0A0A0A] shadow-2xl relative group cursor-zoom-in"
                 >
                     <div className="relative bg-void flex items-center justify-center overflow-hidden">
@@ -211,6 +224,16 @@ export const GifShowcase = ({ description, src }) => {
         setMounted(true);
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') setIsFullScreen(false);
+        };
+        if (isFullScreen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isFullScreen]);
+
     return (
         <>
             {mounted && isFullScreen && createPortal(
@@ -233,6 +256,9 @@ export const GifShowcase = ({ description, src }) => {
                 <div className="mb-12"><p className="font-sans text-xl text-mist leading-relaxed font-light max-w-2xl">{description}</p></div>
                 <div
                     onClick={() => setIsFullScreen(true)}
+                    onKeyDown={(e) => e.key === 'Enter' && setIsFullScreen(true)}
+                    role="button"
+                    tabIndex={0}
                     className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full group cursor-zoom-in"
                 >
                     <img src={src} alt="" className="w-full h-auto block" />
@@ -261,6 +287,18 @@ export const RuleBuilderCarousel = ({ items }) => {
         return () => clearInterval(interval);
     }, [items.length, isFullScreen]);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') setIsFullScreen(false);
+            if (e.key === 'ArrowLeft') setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+            if (e.key === 'ArrowRight') setActiveIndex((prev) => (prev + 1) % items.length);
+        };
+        if (isFullScreen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isFullScreen, items.length]);
+
     const activeItem = items[activeIndex];
 
     return (
@@ -288,7 +326,13 @@ export const RuleBuilderCarousel = ({ items }) => {
                 </motion.div>,
                 document.body
             )}
-            <div className="mb-32 w-full group cursor-pointer relative" onClick={() => setIsFullScreen(true)}>
+            <div
+                className="mb-32 w-full group cursor-pointer relative"
+                onClick={() => setIsFullScreen(true)}
+                onKeyDown={(e) => e.key === 'Enter' && setIsFullScreen(true)}
+                role="button"
+                tabIndex={0}
+            >
                 <div className="relative w-full aspect-[2.5/1] bg-[#0A0A0A] border border-dashed border-white/10 rounded-2xl overflow-hidden hover:border-neon/30">
                     <div className="absolute inset-0 flex items-center justify-center z-10 opacity-60 group-hover:opacity-100">
                         <div className="flex flex-col items-center gap-4">

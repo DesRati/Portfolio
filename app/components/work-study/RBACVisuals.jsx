@@ -143,11 +143,7 @@ export const RBACRolesVisual = () => {
                             </div>
                         </div>
                     ))}
-                    <div className="grid grid-cols-12 px-4 py-3 text-stone-600 hover:bg-[#202020] transition-colors cursor-pointer">
-                        <div className="col-span-12 pl-2 flex items-center gap-2 text-sm font-sans">
-                            <span>+ New</span>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
