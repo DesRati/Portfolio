@@ -18,7 +18,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Work', href: '#work' },
         { name: 'About', href: '#about' },
-        { name: 'Philosophy', href: '#philosophy' },
+        { name: 'Resume', href: 'https://drive.google.com/file/d/1x9vxPEOyNlWri5b4vG88AkAQufsd8bfK/view?usp=sharing', external: true },
     ];
 
     return (
@@ -46,19 +46,24 @@ const Navbar = () => {
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="font-sans text-sm text-mist hover:text-white transition-colors relative group"
-                        >
-                            {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-neon group-hover:w-full transition-all duration-300"></span>
-                        </Link>
-                    ))}
-                    <Button variant="primary" href="mailto:contact@ratiagarwal.com" className="!py-2 !px-4 text-sm hover:!bg-neon hover:!text-void border-none">
-                        Let's Talk
-                    </Button>
+                    {navLinks.map((link) => {
+                        const isExternal = link.external;
+                        const LinkComponent = isExternal ? 'a' : Link;
+                        const linkProps = isExternal
+                            ? { href: link.href, target: "_blank", rel: "noopener noreferrer" }
+                            : { href: link.href };
+
+                        return (
+                            <LinkComponent
+                                key={link.name}
+                                {...linkProps}
+                                className="font-sans text-sm text-mist hover:text-white transition-colors relative group"
+                            >
+                                {link.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-neon group-hover:w-full transition-all duration-300"></span>
+                            </LinkComponent>
+                        );
+                    })}
                 </nav>
             </Container>
         </motion.header>
