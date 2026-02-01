@@ -22,34 +22,30 @@ const ProjectItem = ({ project, index }) => {
     return (
         <Wrapper {...wrapperProps}>
             <motion.div
-                className={`relative py-8 md:py-12 border-t border-white/10 overflow-hidden ${isComingSoon ? 'opacity-50 grayscale' : ''}`}
+                className={`relative py-8 md:py-12 border-t border-white/10 overflow-hidden`}
                 initial="initial"
-                whileHover={isComingSoon ? "initial" : "hover"} // Disable hover animation for coming soon
-                onMouseMove={!isComingSoon ? handleMouseMove : undefined}
+                whileHover="hover"
+                onMouseMove={handleMouseMove}
             >
-                {/* 1. Subtle Ambient Glow (Fixed) - Disabled for Coming Soon */}
-                {!isComingSoon && (
-                    <motion.div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 ease-out"
-                        style={{ background: project.gradient }}
-                    />
-                )}
+                {/* 1. Subtle Ambient Glow (Fixed) */}
+                <motion.div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 ease-out"
+                    style={{ background: project.gradient }}
+                />
 
-                {/* 2. Mouse Follow Spotlight (Polished) - Disabled for Coming Soon */}
-                {!isComingSoon && (
-                    <motion.div
-                        className="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition duration-300"
-                        style={{
-                            background: useMotionTemplate`
-                            radial-gradient(
-                                650px circle at ${mouseX}px ${mouseY}px,
-                                rgba(255,255,255,0.1),
-                                transparent 80%
-                            )
-                        `
-                        }}
-                    />
-                )}
+                {/* 2. Mouse Follow Spotlight (Polished) */}
+                <motion.div
+                    className="absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition duration-300"
+                    style={{
+                        background: useMotionTemplate`
+                        radial-gradient(
+                            650px circle at ${mouseX}px ${mouseY}px,
+                            rgba(255,255,255,0.1),
+                            transparent 80%
+                        )
+                    `
+                    }}
+                />
 
                 {/* Content Grid */}
                 <div className="container mx-auto px-8 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center pointer-events-none">

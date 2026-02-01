@@ -18,7 +18,7 @@ const Impact = () => {
     return (
         <section className="py-32 bg-void border-t border-white/5">
             <div className="container mx-auto px-8 max-w-7xl">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
                     <h2 className="font-display text-4xl md:text-6xl text-ice">
                         IMPACT & <span className="text-neon">FEEDBACK</span>
                     </h2>

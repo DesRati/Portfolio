@@ -58,11 +58,11 @@ export default function ProjectPage() {
             <div ref={containerRef} className="relative z-10">
 
                 {/* HERO SECTION */}
-                <section className="relative min-h-[70vh] md:min-h-[90vh] flex flex-col justify-end pb-20 md:pb-32 px-6 md:px-8 pt-40 md:pt-40">
+                <section className="relative min-h-[85vh] md:min-h-[90vh] flex flex-col justify-end pb-24 md:pb-32 px-6 md:px-8 pt-48 md:pt-40">
                     <motion.div style={{ y: yHero, opacity: opacityHero }} className="container mx-auto">
                         <div className="flex flex-col gap-6">
                             {/* Tags/Links Row */}
-                            <div className="flex flex-wrap items-center justify-between mb-4">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-4 gap-y-6 md:gap-y-0">
                                 <div className="flex items-center gap-6">
                                     <div className="font-mono text-neon tracking-widest uppercase text-sm">
                                         PROJECT 0{Object.keys(projects).indexOf(slug) + 1}
@@ -96,11 +96,11 @@ export default function ProjectPage() {
                             </div>
 
                             {/* Massive Title */}
-                            <h1 className="font-display font-bold text-[15vw] md:text-[10vw] leading-[0.85] tracking-tighter text-ice mix-blend-overlay break-words">
+                            <h1 className="font-display font-bold text-[18vw] md:text-[10vw] leading-[0.8] tracking-tighter text-ice mix-blend-overlay break-words mt-4 md:mt-0">
                                 {project.hero.title}
                             </h1>
 
-                            <p className="font-sans text-2xl md:text-3xl text-mist max-w-3xl mt-8 font-light leading-relaxed">
+                            <p className="font-sans text-xl md:text-3xl text-mist max-w-3xl mt-6 md:mt-8 font-light leading-relaxed">
                                 {project.hero.subtitle}
                             </p>
                         </div>

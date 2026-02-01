@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <footer className="py-20 bg-void border-t border-white/5">
-            <div className="container mx-auto px-8 max-w-7xl flex flex-col md:flex-row justify-between items-end">
+            <div className="container mx-auto px-8 max-w-7xl flex flex-col md:flex-row justify-between md:items-end gap-12 md:gap-0">
                 <div>
                     <h2 className="font-display text-5xl md:text-8xl text-ice leading-[0.8] mb-8">
                         LET'S <br />
@@ -22,8 +22,8 @@ const Footer = () => {
                     </p>
                 </div>
 
-                <div className="flex flex-col items-end gap-6 mt-12 md:mt-0">
-                    <div className="flex gap-8">
+                <div className="flex flex-col items-start md:items-end gap-6">
+                    <div className="flex flex-wrap gap-8">
                         {socialLinks.map((link) => (
                             <a
                                 key={link.name}
