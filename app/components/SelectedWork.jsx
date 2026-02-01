@@ -144,7 +144,7 @@ const SelectedWork = () => {
     ];
 
     return (
-        <section id="work" className="relative bg-void py-16 md:py-24">
+        <section id="work" className="relative bg-void py-16 md:py-24 overflow-hidden">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-neon/5 blur-[120px] pointer-events-none" />
 
