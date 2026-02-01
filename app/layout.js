@@ -23,34 +23,26 @@ const handdrawn = Architects_Daughter({
 })
 
 export const metadata = {
-    title: 'Rati Agarwal',
-    description: 'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
+    title: 'Rati Agarwal — Product Designer',
+    description: 'Archive of Rati Agarwal. 5 Years Experience. Specializing in Design Systems, Enterprise UX, and AI Interfaces.',
     themeColor: '#000000',
     icons: {
         icon: '/favicon.svg',
     },
     openGraph: {
-        title: 'Rati Agarwal',
+        title: 'Rati Agarwal — Product Designer',
         description:
-            'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
+            'Archive of Rati Agarwal. 5 Years Experience. Specializing in Design Systems, Enterprise UX, and AI Interfaces.',
         url: 'https://ratiagarwal.vercel.app',
         siteName: 'Rati Agarwal',
-        images: [
-            {
-                url: '/logo.svg',
-                width: 1200,
-                height: 630,
-                alt: 'Rati Agarwal - Product Designer',
-            },
-        ],
+        locale: 'en_US',
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Rati Agarwal',
+        title: 'Rati Agarwal — Product Designer',
         description:
-            'Archive of Rati Agarwal. 5 Years Experience. Designing systems for the future.',
-        images: ['/logo.svg'],
+            'Archive of Rati Agarwal. 5 Years Experience. Specializing in Design Systems, Enterprise UX, and AI Interfaces.',
     },
 }
 
