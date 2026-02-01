@@ -23,6 +23,7 @@ const handdrawn = Architects_Daughter({
 })
 
 export const metadata = {
+    metadataBase: new URL('https://ratiagarwal.vercel.app'),
     title: 'Rati Agarwal — Product Designer',
     description: 'Archive of Rati Agarwal. 5 Years Experience. Specializing in Design Systems, Enterprise UX, and AI Interfaces.',
     themeColor: '#000000',
